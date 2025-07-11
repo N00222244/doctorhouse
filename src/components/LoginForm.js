@@ -4,6 +4,41 @@ import {useAuth} from "../utils/useAuth";
 
 const LoginForm = () => {
 
+
+    const {Navigate} = useNavigate();
+    const {login} = useAuth();
+
+
+    // create state variable named form, form object holds email and password values
+    // setform updates with new data causing react to re render with ne form data
+    const [form, setForm] = useState({email:'', password:''})
+
+
+    // page refreshes on submit automatically this prevents it from happpening then calls the login  function from use auth in utility
+    const handleSubmit = (e) =>{
+
+        e.preventDefault();
+
+        login(form.email,form.password);
+
+        Navigate("/");
+
+    }
+
+    // handlechange updates the current value of a field with new values
+    const handleChange = (e) => {
+       setForm(({...form, [e.target.name]: e.target.value})); 
+    }
+
+    return (
+        <form>
+            <input onChange={handleChange} value={form.email} type='email' ></input>
+            <input onChange={handleChange} value={form.password} type='password'></input>
+            <button onClick={handleSubmit}>Submit Login</button>
+        </form>
+    )
+
+
 } 
 
 
