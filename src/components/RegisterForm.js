@@ -6,7 +6,7 @@ import {useAuth} from "../utils/useAuth";
 const RegisterForm = (props) => {
 
 
-    const {navigate} = useNavigate();
+    const navigate = useNavigate();
     const {login} = useAuth();
 
 

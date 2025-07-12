@@ -5,7 +5,7 @@ import {useAuth} from "../utils/useAuth";
 const LoginForm = () => {
 
 
-    const {navigate} = useNavigate();
+    const navigate = useNavigate();
     const {login} = useAuth();
 
 
@@ -21,7 +21,7 @@ const LoginForm = () => {
 
         login(form.email,form.password);
 
-        navigate("/home");
+        navigate("/app/home");
 
     }
 
