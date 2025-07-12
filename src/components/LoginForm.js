@@ -5,7 +5,7 @@ import {useAuth} from "../utils/useAuth";
 const LoginForm = () => {
 
 
-    const {Navigate} = useNavigate();
+    const {navigate} = useNavigate();
     const {login} = useAuth();
 
 
@@ -21,7 +21,7 @@ const LoginForm = () => {
 
         login(form.email,form.password);
 
-        Navigate("/");
+        navigate("/home");
 
     }
 
@@ -32,8 +32,8 @@ const LoginForm = () => {
 
     return (
         <form>
-            <input onChange={handleChange} value={form.email} type='email' ></input>
-            <input onChange={handleChange} value={form.password} type='password'></input>
+            <input onChange={handleChange} value={form.email} type='email' name="email" ></input>
+            <input onChange={handleChange} value={form.password} type='password' name='password' ></input>
             <button onClick={handleSubmit}>Submit Login</button>
         </form>
     )

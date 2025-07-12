@@ -3,10 +3,12 @@ import { AuthProvider } from "./utils/useAuth";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 
+
 // component imports
 
 import LoginForm from "./components/LoginForm";
 import LandingPage from "./pages/LandingPage";
+import RegisterForm from "./components/RegisterForm";
 import { MantineProvider } from "@mantine/core";
 
 
@@ -23,6 +25,9 @@ const App = () =>{
                     <Routes>
 
                         <Route path="/" element={<LandingPage />} />
+
+                        <Route path="/login" element={<LoginForm />} />
+                        <Route path="/register" element={<RegisterForm />} />
                     </Routes>
 
 

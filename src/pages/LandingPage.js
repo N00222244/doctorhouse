@@ -19,8 +19,8 @@ const LandingPage = () => {
             <h1>Princeton Plainsbourough Medical Centre</h1>
             <h2>This software is intended for staff of the current premises if not you piss off</h2>
 
-            <Button variant='filled'>Register</Button>
-            <Button variant='filled'>Login</Button>
+            <Button variant='filled' component={Link} to='/login' >Login</Button>
+            <Button variant='filled' component={Link} to='/register'>Register</Button>
 
         </div>
     );
