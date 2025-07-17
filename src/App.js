@@ -17,6 +17,7 @@ import ProtectedRoute from "./components/ProtectedRoutes";
 //page imports 
 import LandingPage from "./pages/LandingPage";
 import HomePage from "./pages/HomePage";
+import SingleDoctor from "./pages/Doctors/SingleDoctor";
 
 const App = () =>{
     return (
@@ -35,6 +36,8 @@ const App = () =>{
 
                         {/* These Routes are protected and need a valid token to navigated through */}
                         <Route path="/app" element={<ProtectedRoute/>}>
+                        <Route path="/app/doctor/:id" element={<SingleDoctor/>}></Route>
+                        
 
 
                             <Route path="home" element={<HomePage />} />
