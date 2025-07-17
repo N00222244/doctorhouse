@@ -17,7 +17,9 @@ import ProtectedRoute from "./components/ProtectedRoutes";
 //page imports 
 import LandingPage from "./pages/LandingPage";
 import HomePage from "./pages/HomePage";
-import SingleDoctor from "./pages/Doctors/SingleDoctor";
+//doctor
+import SingleDoctor from "./pages/doctors/SingleDoctor";
+
 
 const App = () =>{
     return (

@@ -61,8 +61,18 @@ const HomePage = () =>{
 
                         <div>
 
+                            
+
+
+
+                        <div className="doctors">
+
+                        <h1>Doctors </h1>    
+
                         <h2>Dr {doctor.first_name}{doctor.last_name}</h2>
-                        <h2>Specialisation: {doctor.specialisation}</h2>
+                      
+
+                        </div>
 
                         </div>
 
