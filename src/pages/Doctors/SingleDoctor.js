@@ -37,7 +37,7 @@ const SingleDoctor = () => {
         <>
 
         <h2>Doctor ID: {doctor.id}</h2>
-        <h1>Full Name: DR {doctor.first_name}</h1>
+        <h1>Full Name: DR {doctor.first_name} {doctor.last_name}</h1>
         <h2>First Name : {doctor.first_name}</h2>
         <h2>First Name : {doctor.last_name}</h2>
         <h2>Specialisation: {doctor.specialisation}</h2>

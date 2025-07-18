@@ -55,34 +55,14 @@ const HomePage = () =>{
             {/* checks if there are doctors then maps each doctor in the array and displays them as designed within the return statement */}
             {
                 doctors && doctors.map((doctor) =>{
-
-
                     return (
-
-                        <div>
-
-                            
-
-
-
-                        <div className="doctors">
-
-                        <h1>Doctors </h1>    
-
-                        <h2>Dr {doctor.first_name}{doctor.last_name}</h2>
-                      
-
-                        </div>
-
-                        </div>
-
-                    )
-                        
-
-                })
+                                <div>
+                                    <h2>Dr {doctor.first_name}{doctor.last_name}</h2>
+                                    <button onClick={() => navigate(`../doctors/${doctor.id}`)}>View Doctor</button>
+                                </div>
+                            )
+                 })
             }
-
-
             </SimpleGrid>
 
 

@@ -38,11 +38,12 @@ const App = () =>{
 
                         {/* These Routes are protected and need a valid token to navigated through */}
                         <Route path="/app" element={<ProtectedRoute/>}>
-                        <Route path="/app/doctor/:id" element={<SingleDoctor/>}></Route>
+                        
                         
 
 
                             <Route path="home" element={<HomePage />} />
+                            <Route path="doctors/:id" element={<SingleDoctor/>} />
 
 
 
