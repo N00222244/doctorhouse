@@ -1,7 +1,11 @@
 //functionality imports 
 import { AuthProvider } from "./utils/useAuth";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import '@mantine/core/styles.css';
 import { MantineProvider } from "@mantine/core";
+import { Notifications } from '@mantine/notifications';
+import '@mantine/notifications/styles.css';
+
 
 
 
@@ -27,7 +31,8 @@ const App = () =>{
 
         <div>
             <AuthProvider>
-                <MantineProvider>
+                <MantineProvider withGlobalStyles withNormalizeCSS>
+                    <Notifications position="bottom-right"  /> 
                 <Router>
 
                     <Routes>

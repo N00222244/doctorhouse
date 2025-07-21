@@ -38,6 +38,7 @@ export const AuthProvider = ({ children }) => {
                 password,
             })
             .then((res) => {
+                console.log("Login API Response Data (res.data):", res.data);
                 setToken(res.data.token);
                 localStorage.setItem("token", res.data.token);
             })
