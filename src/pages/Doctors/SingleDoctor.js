@@ -45,7 +45,7 @@ const SingleDoctor = () => {
         <h2>Phone No: + 353 {doctor.phone}</h2>
 
 
-        <div>Bloody ell its tuesday</div>
+        
         <button onClick={() => navigate(`../doctors/${doctor.id}/edit`)}>Edit Doctor</button>
         
         
