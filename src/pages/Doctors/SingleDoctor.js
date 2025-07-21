@@ -3,6 +3,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useAuth } from "../../utils/useAuth";
 import axios from "axios";
 import { useState, useEffect } from "react";
+import { Button } from "@mantine/core";
 
 
 
@@ -32,6 +33,25 @@ const SingleDoctor = () => {
 
     }, [id, token]); // rerun if these variable values change
 
+
+
+    const DeleteDoctor = async () => {
+    try {
+        await axios.delete(`https://fed-medical-clinic-api.vercel.app/doctors/${id}`, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        });
+
+        
+        navigate('/app/home');
+
+
+     } catch (err) { 
+         console.error("Error deleting doctor:", err);
+     }
+    }
+
     
     return doctor && (
         <>
@@ -47,6 +67,7 @@ const SingleDoctor = () => {
 
         
         <button onClick={() => navigate(`../doctors/${doctor.id}/edit`)}>Edit Doctor</button>
+        <Button onClick={DeleteDoctor}>Delete Doctor</Button>
         
         
         
