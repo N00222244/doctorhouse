@@ -19,6 +19,7 @@ import LandingPage from "./pages/LandingPage";
 import HomePage from "./pages/HomePage";
 //doctor
 import SingleDoctor from "./pages/doctors/SingleDoctor";
+import CreateDocotor from "./pages/doctors/CreateDoctor";
 
 
 const App = () =>{
@@ -44,6 +45,7 @@ const App = () =>{
 
                             <Route path="home" element={<HomePage />} />
                             <Route path="doctors/:id" element={<SingleDoctor/>} />
+                            <Route path="doctors/create" element={<CreateDocotor/>}/>
 
 
 

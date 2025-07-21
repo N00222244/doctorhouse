@@ -47,7 +47,7 @@ const HomePage = () =>{
 
             <h1>This is the mf homepage bitch the login worked</h1>
             <h2>Docotrs</h2>
-
+            <button onClick={() => navigate(`../doctors/create`)}>Create New Doctor</button>
 
             <SimpleGrid cols={3}>
 
@@ -59,6 +59,7 @@ const HomePage = () =>{
                                 <div>
                                     <h2>Dr {doctor.first_name}{doctor.last_name}</h2>
                                     <button onClick={() => navigate(`../doctors/${doctor.id}`)}>View Doctor</button>
+                                    
                                 </div>
                             )
                  })
