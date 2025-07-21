@@ -24,6 +24,7 @@ import HomePage from "./pages/HomePage";
 //doctor
 import SingleDoctor from "./pages/doctors/SingleDoctor";
 import CreateDocotor from "./pages/doctors/CreateDoctor";
+import EditDoctor from "./pages/doctors/EditDoctor";
 
 
 const App = () =>{
@@ -51,6 +52,7 @@ const App = () =>{
                             <Route path="home" element={<HomePage />} />
                             <Route path="doctors/:id" element={<SingleDoctor/>} />
                             <Route path="doctors/create" element={<CreateDocotor/>}/>
+                            <Route path="doctors/:id/edit" element={<EditDoctor/>} />
 
 
 

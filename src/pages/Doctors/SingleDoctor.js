@@ -46,7 +46,8 @@ const SingleDoctor = () => {
 
 
         <div>Bloody ell its tuesday</div>
-        <button>Edit Doctor</button>
+        <button onClick={() => navigate(`../doctors/${doctor.id}/edit`)}>Edit Doctor</button>
+        
         
         
         </>
