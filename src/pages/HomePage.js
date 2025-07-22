@@ -87,6 +87,10 @@ const HomePage = () =>{
                         }}>Logout</Button>
                     )
                 }
+
+
+
+                <Button onClick={() => navigate(`../appointments`)}>View Appoiintments</Button>
             </AppShell.Navbar>
             
 

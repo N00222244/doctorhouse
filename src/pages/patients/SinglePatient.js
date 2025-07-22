@@ -54,6 +54,9 @@ const SinglePatient = () => {
 
    // let timeConversion = new Date(patient.date_of_birth * 1000)
    // console.log(timeConversion);
+
+
+   
     
 
     

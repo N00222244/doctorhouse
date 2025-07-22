@@ -31,6 +31,9 @@ import SinglePatient from "./pages/patients/SinglePatient";
 import CreatePatient from "./pages/patients/CreatePatient";
 import EditPatient from "./pages/patients/EditPatient";
 
+//appointments
+import Appointments from "./pages/Appointments/AllAppointments";
+
 
 const App = () =>{
     return (
@@ -61,6 +64,8 @@ const App = () =>{
                             <Route path="patients/:id" element={<SinglePatient/>} />
                             <Route path="patients/create" element={<CreatePatient/>} />
                             <Route path="patients/:id/edit" element={<EditPatient/>} />
+                            <Route path="appointments" element={<Appointments/>} />
+
                             
 
 
