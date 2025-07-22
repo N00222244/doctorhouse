@@ -52,15 +52,22 @@ const SinglePatient = () => {
      }
     }
 
+   // let timeConversion = new Date(patient.date_of_birth * 1000)
+   // console.log(timeConversion);
+    
+
+    
     
     return patient && (
         <>
+
+        
 
         <h2>Patient ID: {patient.id}</h2>
         <h1>Full Name: {patient.first_name} {patient.last_name}</h1>
         <h2>First Name : {patient.first_name}</h2>
         <h2>First Name : {patient.last_name}</h2>
-        <h2>Date of Birth: {patient.date_of_birth}</h2>
+        <h2>Date of Birth: {new Date(patient.date_of_birth * 1000).toLocaleDateString()}</h2>
         <h2>Email: {patient.email}</h2>
         <h2>Phone No: + 353 {patient.phone}</h2>
         <h2>Address {patient.address}</h2>

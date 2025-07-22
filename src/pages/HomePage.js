@@ -74,7 +74,20 @@ const HomePage = () =>{
             
 
 
-            <AppShell.Navbar >navbar tester</AppShell.Navbar>
+            <AppShell.Navbar >navbar tester
+
+
+
+                {/* logout button */}
+            {
+                    token && (
+                        <Button color='red' variant={'outline'} onClick={() => {
+                            logout();
+                            navigate('/login', { replace: true })
+                        }}>Logout</Button>
+                    )
+                }
+            </AppShell.Navbar>
             
 
 
@@ -116,15 +129,7 @@ const HomePage = () =>{
 
 
 
-        {/* logout button */}
-            {
-                    token && (
-                        <Button color='red' variant={'outline'} onClick={() => {
-                            logout();
-                            navigate('/login', { replace: true })
-                        }}>Logout</Button>
-                    )
-                }
+        
 
 
             </AppShell>
