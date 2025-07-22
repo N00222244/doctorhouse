@@ -32,7 +32,7 @@ const HomePage = () =>{
 
     const getPatients = async () => {
         try{
-            const res = await axios.get(`https://fed-medical-clinic-api.vercel.app/doctors`)
+            const res = await axios.get(`https://fed-medical-clinic-api.vercel.app/patients`)
             setPatients(res.data)
 
         }
@@ -97,13 +97,13 @@ const HomePage = () =>{
                 <Divider my="md"/>
 
                 <h2>Patients</h2>
-                <button onClick={() => navigate(`../doctors/create`)}>Create New Patient</button>
+                <button onClick={() => navigate(`../patients/create`)}>Create New Patient</button>
                             <SimpleGrid cols={{sm:1, md:2, lg:3, xl:4}}>
                                 {patients && patients.map((patient) =>{
                                 return(
                                     <div>
-                                        <h2>Dr {patient.first_name}{patient.last_name}</h2>
-                                        <button onClick={() => navigate(`../doctors/${patient.id}`)}>View Patient</button>
+                                        <h2> {patient.first_name}{patient.last_name}</h2>
+                                        <button onClick={() => navigate(`../patients/${patient.id}`)}>View Patient</button>
                                     </div>
                             )})}
 
