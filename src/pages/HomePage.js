@@ -1,8 +1,9 @@
-import { Button, SimpleGrid } from "@mantine/core";
+import { Button, SimpleGrid , AppShell, Burger, Divider,Text} from "@mantine/core";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../utils/useAuth";
 import axios from "axios";
 import { useState, useEffect } from "react";
+import { useDisclosure } from "@mantine/hooks";
 
 
 
@@ -10,6 +11,7 @@ const HomePage = () =>{
 
     const navigate = useNavigate();
     const {logout, token} = useAuth();
+    const [opened, { toggle }] = useDisclosure(); // this is to toggle nav on mobile devices 
     
     const [doctors, setDoctors] = useState([]);
 
@@ -44,27 +46,46 @@ const HomePage = () =>{
 
     return (
         <div>
-
-            <h1>This is the mf homepage bitch the login worked</h1>
-            <h2>Docotrs</h2>
-            <button onClick={() => navigate(`../doctors/create`)}>Create New Doctor</button>
-
-            <SimpleGrid cols={3}>
+            <AppShell padding="md" header={{ height: 60 }} navbar={{width: 300,breakpoint: 'sm',collapsed: { mobile: !opened }}}>
 
 
-            {/* checks if there are doctors then maps each doctor in the array and displays them as designed within the return statement */}
-            {
-                doctors && doctors.map((doctor) =>{
-                    return (
-                                <div>
-                                    <h2>Dr {doctor.first_name}{doctor.last_name}</h2>
-                                    <button onClick={() => navigate(`../doctors/${doctor.id}`)}>View Doctor</button>
+
+            <AppShell.Header >
+                <Burger opened={opened} onClick={toggle} hiddenFrom="sm"size="sm"/>
+                    
+                        <Text>Princeton Plainsbourough Medical Centre </Text>
+                    
+            </AppShell.Header>
+            <Divider my="md"/>
+
+            
+
+
+            <AppShell.Navbar>navbar tester</AppShell.Navbar>
+            
+
+
+            <AppShell.Main>
+                <h2>Docotrs</h2>
+                <button onClick={() => navigate(`../doctors/create`)}>Create New Doctor</button>
+
+                    <SimpleGrid cols={3}>
+
+
+                    {/* checks if there are doctors then maps each doctor in the array and displays them as designed within the return statement */}
+                        {
+                            doctors && doctors.map((doctor) =>{
+                                return (
+                                    <div>
+                                        <h2>Dr {doctor.first_name}{doctor.last_name}</h2>
+                                       <button onClick={() => navigate(`../doctors/${doctor.id}`)}>View Doctor</button>
                                     
-                                </div>
-                            )
-                 })
+                                     </div>
+                                )
+                            })
             }
-            </SimpleGrid>
+                    </SimpleGrid>
+            </AppShell.Main>
 
 
             
@@ -82,6 +103,7 @@ const HomePage = () =>{
                 }
 
 
+            </AppShell>
         </div>
     )
 
