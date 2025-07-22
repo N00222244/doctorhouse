@@ -14,6 +14,7 @@ const HomePage = () =>{
     const [opened, { toggle }] = useDisclosure(); // this is to toggle nav on mobile devices 
     
     const [doctors, setDoctors] = useState([]);
+    const [patients, setPatients] = useState([]);
 
 
 
@@ -29,6 +30,17 @@ const HomePage = () =>{
         }
     };
 
+    const getPatients = async () => {
+        try{
+            const res = await axios.get(`https://fed-medical-clinic-api.vercel.app/doctors`)
+            setPatients(res.data)
+
+        }
+        catch(e){
+            console.error(e)
+        }
+    };
+
 
     // useEffect cant be async
     // define fetchdata to be async so can use await to pause the function till the functions within have been cleared before continuing function body
@@ -38,6 +50,7 @@ const HomePage = () =>{
         const fetchData = async () =>{
 
             await getDoctors();
+            await getPatients();
         }
         fetchData();
 
@@ -45,13 +58,13 @@ const HomePage = () =>{
 
 
     return (
-        <div>
-            <AppShell padding="md" header={{ height: 60 }} navbar={{width: 300,breakpoint: 'sm',collapsed: { mobile: !opened }}}>
+        <div >
+            <AppShell padding="md" header={{ height: 60 }} navbar={{width: 300,breakpoint: 'sm',collapsed: { mobile: !opened }}}  >
 
 
 
             <AppShell.Header >
-                <Burger opened={opened} onClick={toggle} hiddenFrom="sm"size="sm"/>
+                <Burger opened={opened} onClick={toggle} hiddenFrom="sm" size="sm" color="black"/>
                     
                         <Text>Princeton Plainsbourough Medical Centre </Text>
                     
@@ -61,30 +74,41 @@ const HomePage = () =>{
             
 
 
-            <AppShell.Navbar>navbar tester</AppShell.Navbar>
+            <AppShell.Navbar >navbar tester</AppShell.Navbar>
             
 
 
             <AppShell.Main>
                 <h2>Docotrs</h2>
-                <button onClick={() => navigate(`../doctors/create`)}>Create New Doctor</button>
-
-                    <SimpleGrid cols={3}>
-
-
+                    <button onClick={() => navigate(`../doctors/create`)}>Create New Doctor</button>
+                        <SimpleGrid cols={{sm:1, md:2, lg:3, xl:4}}>
                     {/* checks if there are doctors then maps each doctor in the array and displays them as designed within the return statement */}
-                        {
-                            doctors && doctors.map((doctor) =>{
-                                return (
+                            {doctors && doctors.map((doctor) =>{
+                                return(
                                     <div>
                                         <h2>Dr {doctor.first_name}{doctor.last_name}</h2>
-                                       <button onClick={() => navigate(`../doctors/${doctor.id}`)}>View Doctor</button>
-                                    
-                                     </div>
-                                )
-                            })
-            }
-                    </SimpleGrid>
+                                        <button onClick={() => navigate(`../doctors/${doctor.id}`)}>View Doctor</button>
+                                    </div>
+                            )})}
+                        </SimpleGrid>
+
+
+
+                <Divider my="md"/>
+
+                <h2>Patients</h2>
+                <button onClick={() => navigate(`../doctors/create`)}>Create New Patient</button>
+                            <SimpleGrid cols={{sm:1, md:2, lg:3, xl:4}}>
+                                {patients && patients.map((patient) =>{
+                                return(
+                                    <div>
+                                        <h2>Dr {patient.first_name}{patient.last_name}</h2>
+                                        <button onClick={() => navigate(`../doctors/${patient.id}`)}>View Patient</button>
+                                    </div>
+                            )})}
+
+                            </SimpleGrid>
+
             </AppShell.Main>
 
 
