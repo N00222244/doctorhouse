@@ -34,6 +34,7 @@ import EditPatient from "./pages/patients/EditPatient";
 //appointments
 import Appointments from "./pages/Appointments/AllAppointments";
 import SingleAppointment from "./pages/Appointments/SingleAppointment";
+import CreateAppointment from "./pages/Appointments/CreateAppointment";
 
 
 const App = () =>{
@@ -67,6 +68,7 @@ const App = () =>{
                             <Route path="patients/:id/edit" element={<EditPatient/>} />
                             <Route path="appointments" element={<Appointments/>} />
                             <Route path="appointments/:id" element={<SingleAppointment/>} />
+                            <Route path="appointments/create" element={<CreateAppointment/>} />
 
                             
 
