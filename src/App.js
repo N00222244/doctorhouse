@@ -41,6 +41,7 @@ import EditAppointment from "./pages/Appointments/EditAppointment";
 
 // diagnoses
 import Diagnoses from "./pages/Diagnoses/AllDiagnoses";
+import SingleDiagnoses from "./pages/Diagnoses/SingleDiagnosis";
 
 
 const App = () =>{
@@ -64,19 +65,24 @@ const App = () =>{
                         
                         
 
-
+                            {/* Home Page */}
                             <Route path="home" element={<HomePage />} />
+                            {/* Doctors */}
                             <Route path="doctors/:id" element={<SingleDoctor/>} />
                             <Route path="doctors/create" element={<CreateDocotor/>}/>
                             <Route path="doctors/:id/edit" element={<EditDoctor/>} />
+                            {/* Patients */}
                             <Route path="patients/:id" element={<SinglePatient/>} />
                             <Route path="patients/create" element={<CreatePatient/>} />
                             <Route path="patients/:id/edit" element={<EditPatient/>} />
+                            {/* Appointments */}
                             <Route path="appointments" element={<Appointments/>} />
                             <Route path="appointments/:id" element={<SingleAppointment/>} />
                             <Route path="appointments/create" element={<CreateAppointment/>} />
                             <Route path="appointments/:id/edit" element={<EditAppointment/>} />
+                            {/* Diagnoses */}
                             <Route path="diagnoses" element={<Diagnoses/>} />
+                            <Route path="diagnoses/:id" element={<SingleDiagnoses/>} />
 
                             
 
