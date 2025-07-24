@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import {useAuth} from "../utils/useAuth";
+import { Button, Fieldset , TextInput, PasswordInput} from "@mantine/core";
 
 const LoginForm = () => {
 
@@ -31,11 +32,14 @@ const LoginForm = () => {
     }
 
     return (
+        <Fieldset legend="Enter Your Login Details">
         <form>
-            <input onChange={handleChange} value={form.email} type='email' name="email" ></input>
-            <input onChange={handleChange} value={form.password} type='password' name='password' ></input>
-            <button onClick={handleSubmit}>Submit Login</button>
+
+            <TextInput onChange={handleChange} value={form.email} type='email' name="email" placeholder="Email Address"></TextInput>
+            <PasswordInput onChange={handleChange} value={form.password} type='password' name='password' placeholder="Password"></PasswordInput>
+            <Button onClick={handleSubmit}>Submit Login</Button>
         </form>
+        </Fieldset>
     )
 
 

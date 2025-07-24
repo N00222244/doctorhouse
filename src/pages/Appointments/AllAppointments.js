@@ -1,4 +1,4 @@
-import { Button, SimpleGrid , } from "@mantine/core";
+import { Button, SimpleGrid , Card } from "@mantine/core";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../utils/useAuth";
 import axios from "axios";
@@ -58,11 +58,13 @@ const Appointments = () =>{
                             <SimpleGrid cols={{sm:1, md:2, lg:3, xl:4}}>
                                 {appointments && appointments.map((appointment) =>{
                                 return(
+                                    <Card shadow="sm" padding="lg" radius="md" withBorder>
                                     <div>
                                         <h2> Date: {appointment.appointment_date}</h2>
                                         <h2> Patient: {appointment.patient_id}</h2>
                                         <button onClick={() => navigate(`../appointments/${appointment.id}`)}>View Appointment</button>
                                     </div>
+                                    </Card>
                             )})}
 
                             </SimpleGrid>

@@ -4,6 +4,7 @@ import { useAuth } from "../../utils/useAuth";
 import { TextInput, NumberInput } from "@mantine/core";
 import { useForm  } from '@mantine/form';
 import { showNotification } from "@mantine/notifications";
+import { DatePickerInput } from "@mantine/dates";
  
 
 
@@ -53,9 +54,10 @@ const EditAppointment = () => {
 
             showNotification({
                 title: 'Appointment Edited Succesfully',
-                message: `Appointment on ${res.data.appointment_date}  Edited succesfully.`,
+                message: `Appointment on ${new Date(res.data.appointment_date).toLocaleDateString()}  Edited succesfully.`,
                 color: 'green',
                 autoClose: 7000
+               
                 
             });
 
@@ -74,7 +76,7 @@ const EditAppointment = () => {
             <form onSubmit={form.onSubmit(handleSubmit)}>
 
                 
-                <TextInput  type='text'  {...form.getInputProps('appointment_date')}  name="appointment_date"  placeholder="Enter Appointment Date" ></TextInput>
+                <DatePickerInput  {...form.getInputProps('appointment_date')}  name="appointment_date"  placeholder="Enter Appointment Date" ></DatePickerInput>
                 <NumberInput  type='number'  {...form.getInputProps('doctor_id')}  name="doctor_id"  placeholder="Enter Docotor ID " ></NumberInput>
                 <NumberInput  type='number'  {...form.getInputProps('patient_id')}  name="patient_id"  placeholder="Enter Patient ID" ></NumberInput>
                

@@ -1,9 +1,10 @@
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../utils/useAuth";
-import { TextInput, NumberInput } from "@mantine/core";
+import { TextInput, NumberInput, Divider } from "@mantine/core";
 import { useForm  } from '@mantine/form';
 import { showNotification } from "@mantine/notifications";
+import { DatePickerInput } from "@mantine/dates";
  
 
 
@@ -73,9 +74,13 @@ const CreateAppointment = () => {
             <form onSubmit={form.onSubmit(handleSubmit)}>
 
                 
-                <TextInput  type='text'  {...form.getInputProps('appointment_date')}  name="appointment_date"  placeholder="Enter Appointment Date" ></TextInput>
-                <NumberInput  type='number'  {...form.getInputProps('doctor_id')}  name="doctor_id"  placeholder="Enter Docotor ID " ></NumberInput>
-                <NumberInput  type='number'  {...form.getInputProps('patient_id')}  name="patient_id"  placeholder="Enter Patient ID" ></NumberInput>
+                <DatePickerInput   {...form.getInputProps('appointment_date')}  name="appointment_date"  placeholder="Enter Appointment Date" ></DatePickerInput>
+                <NumberInput   {...form.getInputProps('doctor_id')}  name="doctor_id"  placeholder="Enter Docotor ID " ></NumberInput>
+                <NumberInput    {...form.getInputProps('patient_id')}  name="patient_id"  placeholder="Enter Patient ID" ></NumberInput>
+
+                <Divider></Divider>
+
+                
                
                 <button type="submit">Create Patient</button> 
             </form>
