@@ -39,6 +39,9 @@ import SingleAppointment from "./pages/Appointments/SingleAppointment";
 import CreateAppointment from "./pages/Appointments/CreateAppointment";
 import EditAppointment from "./pages/Appointments/EditAppointment";
 
+// diagnoses
+import Diagnoses from "./pages/Diagnoses/AllDiagnoses";
+
 
 const App = () =>{
     return (
@@ -73,6 +76,7 @@ const App = () =>{
                             <Route path="appointments/:id" element={<SingleAppointment/>} />
                             <Route path="appointments/create" element={<CreateAppointment/>} />
                             <Route path="appointments/:id/edit" element={<EditAppointment/>} />
+                            <Route path="diagnoses" element={<Diagnoses/>} />
 
                             
 
