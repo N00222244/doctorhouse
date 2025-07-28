@@ -60,7 +60,7 @@ const Appointments = () =>{
                                 return(
                                     <Card shadow="sm" padding="lg" radius="md" withBorder>
                                     <div>
-                                        <h2> Date: {appointment.appointment_date}</h2>
+                                        <h2> Date: {new Date(appointment.appointment_date * 1000).toLocaleDateString()}</h2>
                                         <h2> Patient: {appointment.patient_id}</h2>
                                         <button onClick={() => navigate(`../appointments/${appointment.id}`)}>View Appointment</button>
                                     </div>
