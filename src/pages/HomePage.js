@@ -92,6 +92,7 @@ const HomePage = () =>{
 
                 <Button onClick={() => navigate(`../appointments`)}>View Appointments</Button>
                  <Button onClick={() => navigate(`../diagnoses`)}>View Diagnoses</Button>
+                 <Button onClick={() => navigate(`../prescriptions`)}>View Prescriptions</Button>
             </AppShell.Navbar>
             
 

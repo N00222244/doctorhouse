@@ -45,6 +45,9 @@ import SingleDiagnoses from "./pages/Diagnoses/SingleDiagnosis";
 import CreateDiagnoses from "./pages/Diagnoses/CreateDiagnoses";
 import EditDiagnoses from "./pages/Diagnoses/EditDiagnoses";
 
+//prescriptions
+import Prescriptions from "./pages/prescriptions/AllPrescriptions";
+
 
 const App = () =>{
     return (
@@ -88,6 +91,8 @@ const App = () =>{
                             <Route path="diagnoses/create" element={<CreateDiagnoses/>} />
                             <Route path="diagnoses/:id/edit" element={<EditDiagnoses/>} />
 
+                            {/* Prescriptions */}
+                            <Route path="prescriptions" element={<Prescriptions/>} />
                             
 
 
