@@ -47,6 +47,9 @@ import EditDiagnoses from "./pages/Diagnoses/EditDiagnoses";
 
 //prescriptions
 import Prescriptions from "./pages/prescriptions/AllPrescriptions";
+import CreatePrescription from "./pages/prescriptions/CreatePrescription";
+import SinglePrescription from "./pages/prescriptions/SinglePrescription";
+import EditPrescription from "./pages/prescriptions/EditPrescription";
 
 
 const App = () =>{
@@ -93,6 +96,9 @@ const App = () =>{
 
                             {/* Prescriptions */}
                             <Route path="prescriptions" element={<Prescriptions/>} />
+                            <Route path="prescriptions/create" element={<CreatePrescription/>} />
+                            <Route path="prescriptions/:id" element={<SinglePrescription/>} />
+                            <Route path="prescriptions/:id/edit" element={<EditPrescription/>} />
                             
 
 
