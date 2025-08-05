@@ -5,6 +5,7 @@ import { TextInput, NumberInput, Divider } from "@mantine/core";
 import { useForm  } from '@mantine/form';
 import { showNotification } from "@mantine/notifications";
 import { DatePickerInput } from "@mantine/dates";
+import { useState } from "react";
  
 
 
@@ -15,6 +16,9 @@ const CreatePrescription = () => {
 
     const navigate = useNavigate();
     const { token } = useAuth();
+    const [SearchValue, SetSearchValue] = useState(null);
+
+
    // console.log("Token before post request is sent:", token); <-- Kept geting 401 error 
    // needed to see what actually was being sent when token was called from use auth
    // turns out the whole object was and forgot to destructure it oopsie daisies
@@ -36,6 +40,11 @@ const CreatePrescription = () => {
            
         },
     });
+
+
+    const handleSearchTerm = () => {
+        
+    } 
 
 
     const handleSubmit = () => {
