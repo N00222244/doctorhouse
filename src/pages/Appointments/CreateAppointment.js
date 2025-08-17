@@ -5,6 +5,10 @@ import { TextInput, NumberInput, Divider } from "@mantine/core";
 import { useForm  } from '@mantine/form';
 import { showNotification } from "@mantine/notifications";
 import { DatePickerInput } from "@mantine/dates";
+import { useEffect, useState } from "react";
+
+import { Select } from "@mantine/core";
+
  
 
 
@@ -15,6 +19,11 @@ const CreateAppointment = () => {
 
     const navigate = useNavigate();
     const { token } = useAuth();
+
+    const [doctors, setDoctors] = useState([]);
+    const [patients, setPatients] = useState([]);
+    
+    
    // console.log("Token before post request is sent:", token); <-- Kept geting 401 error 
    // needed to see what actually was being sent when token was called from use auth
    // turns out the whole object was and forgot to destructure it oopsie daisies
@@ -35,16 +44,39 @@ const CreateAppointment = () => {
 
 
 
-    
+    // Fetch doctor id and patient Id for the dropdowns whne creating an appointment to streamline creation.
 
 
-    const handleSubmit = () => {
+    useEffect(() => {
+        Promise.all([
+            axios.get("https://fed-medical-clinic-api.vercel.app/doctors", {
+                headers: { Authorization: `Bearer ${token}` },
+            }),
+            axios.get("https://fed-medical-clinic-api.vercel.app/patients", {
+                headers: { Authorization: `Bearer ${token}` },
+            }),
+        ])
+            .then(([doctorsRes, patientsRes]) => {
+                setDoctors(doctorsRes.data);
+                setPatients(patientsRes.data);
+            })
+            .catch((err) => console.error("Error fetching doctors or patients:", err));
+    }, [token]);
+
+
+    const handleSubmit = (values) => {
         
 
         
-        console.log('Token value:', token); 
+        //console.log('Token value:', token); 
+
         // sends a post request to the api url with the form data
-        axios.post(`https://fed-medical-clinic-api.vercel.app/appointments`, form.values, {
+        axios.post(`https://fed-medical-clinic-api.vercel.app/appointments`, 
+            {
+                appointment_date: values.appointment_date,
+                    doctor_id: Number(values.doctor_id),
+                    patient_id: Number(values.patient_id),
+            }, {
             headers: {
                 Authorization: `Bearer ${token}`
             }
@@ -79,14 +111,23 @@ const CreateAppointment = () => {
 
                 
                 <DatePickerInput   {...form.getInputProps('appointment_date')}  name="appointment_date"  placeholder="Enter Appointment Date" ></DatePickerInput>
-                <NumberInput   {...form.getInputProps('doctor_id')}  name="doctor_id"  placeholder="Enter Docotor ID " ></NumberInput>
-                <NumberInput    {...form.getInputProps('patient_id')}  name="patient_id"  placeholder="Enter Patient ID" ></NumberInput>
+                <Select label="Doctor" placeholder="Select a doctor" data={doctors.map((doctor) => ({
+                    value: String(doctor.id), 
+                    label: `Dr. ${doctor.first_name} ${doctor.last_name}`,
+                }))} 
+                {...form.getInputProps("doctor_id")}/>
+
+                <Select label="Patient" placeholder="Select a patient" data={patients.map((patient) => ({
+                    value: String(patient.id), 
+                    label: `${patient.first_name} ${patient.last_name}`,
+                }))}
+                {...form.getInputProps("patient_id")}/>
 
                 <Divider></Divider>
 
                 
                
-                <button type="submit">Create Patient</button> 
+                <button type="submit">Create Appointment</button> 
             </form>
 
 

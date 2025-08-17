@@ -14,6 +14,8 @@ const SingleAppointment = () => {
     const  [appointment, setAppointment] = useState(null); // set the Appointment state
     const {id} = useParams(); // grabs id from the url defiend as :id within app.js 
     const navigate = useNavigate();
+    const [doctors, setDoctors] = useState([]);
+    const [patients, setPatients] = useState([]);
 
 
 
