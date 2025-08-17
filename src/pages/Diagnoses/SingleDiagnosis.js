@@ -14,6 +14,10 @@ const SingleDiagnoses = () => {
     const  [diagnoses, setDiagnoses] = useState(null); // set the Diagnoses state
     const {id} = useParams(); // grabs id from the url defiend as :id within app.js 
     const navigate = useNavigate();
+    const [patient, setPatient] = useState([]);
+
+
+    
 
 
 
@@ -25,8 +29,16 @@ const SingleDiagnoses = () => {
         }) 
         .then((res) => {
             console.log(res.data); //when succesful log the response data to the console to chekc its there
-            setDiagnoses(res.data); // store data wtihin set docotr to update teh state
-        })
+            setDiagnoses(res.data);
+                return Promise.all([
+                    axios.get(`https://fed-medical-clinic-api.vercel.app/patients/${res.data.patient_id}`, {
+                        headers: { Authorization: `Bearer ${token}` },
+                    }),
+                ]);
+            })
+            .then(([patientRes]) => {
+                setPatient(patientRes.data);
+            })
         .catch((err) => {
             console.log(err)
         });
@@ -66,9 +78,11 @@ const SingleDiagnoses = () => {
         
 
         <h2>Diagnoses ID: {diagnoses.id}</h2>
+        <h2>Condition: {diagnoses.condition}</h2>
         <h2>Diagnoses Date: {new Date(diagnoses.diagnosis_date * 1000).toLocaleDateString()}</h2>
         <h2>Patient ID: {diagnoses.patient_id}</h2>
-        <h2>Condition {diagnoses.condition}</h2>
+        <h2>Patient Name: {patient.first_name}{patient.last_name}</h2>
+        
         
         
 

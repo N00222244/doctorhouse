@@ -1,10 +1,12 @@
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../utils/useAuth";
-import { TextInput, NumberInput, Divider } from "@mantine/core";
+import { TextInput, NumberInput, Divider, Select } from "@mantine/core";
 import { useForm  } from '@mantine/form';
 import { showNotification } from "@mantine/notifications";
 import { DatePickerInput } from "@mantine/dates";
+import { useEffect, useState } from "react";
+
  
 
 
@@ -15,6 +17,7 @@ const CreateDiagnoses = () => {
 
     const navigate = useNavigate();
     const { token } = useAuth();
+    const [patients, setPatients] = useState([]);
    // console.log("Token before post request is sent:", token); <-- Kept geting 401 error 
    // needed to see what actually was being sent when token was called from use auth
    // turns out the whole object was and forgot to destructure it oopsie daisies
@@ -25,7 +28,7 @@ const CreateDiagnoses = () => {
     const form = useForm({
         initialValues:{
         patient_id: '',
-        condistion: '',
+        condition: '',
         diagnosis_date: ''
         },
          validate: {
@@ -33,14 +36,37 @@ const CreateDiagnoses = () => {
         },
     });
 
+     useEffect(() => {
+        Promise.all([
+            axios.get("https://fed-medical-clinic-api.vercel.app/patients", {
+                headers: { Authorization: `Bearer ${token}` },
+            }),
+        ])
+            .then(([ patientsRes]) => {
+           
+                setPatients(patientsRes.data);
+            })
+            .catch((err) => console.error("Error fetching doctors or patients:", err));
+    }, [token]);
 
-    const handleSubmit = () => {
+
+    const handleSubmit = (values) => {
         
 
         
         console.log('Token value:', token); 
         // sends a post request to the api url with the form data
-        axios.post(`https://fed-medical-clinic-api.vercel.app/diagnoses`, form.values, {
+        axios.post(`https://fed-medical-clinic-api.vercel.app/diagnoses`, 
+            
+            {
+                
+                    
+                patient_id: Number(values.patient_id),
+                diagnosis_date: values.diagnosis_date,
+                condition: values.condition
+            }
+            
+            , {
             headers: {
                 Authorization: `Bearer ${token}`
             }
@@ -74,7 +100,11 @@ const CreateDiagnoses = () => {
             <form onSubmit={form.onSubmit(handleSubmit)}>
 
                 
-                <NumberInput    {...form.getInputProps('patient_id')}  name="patient_id"  placeholder="Enter Patient ID" ></NumberInput>
+                <Select label="Patient" placeholder="Select a patient" data={patients.map((patient) => ({
+                    value: String(patient.id), 
+                    label: `${patient.first_name} ${patient.last_name}`,
+                }))}
+                {...form.getInputProps("patient_id")}/>
                 <TextInput   {...form.getInputProps('condition')}  name="condition"  placeholder="Enter Condition" ></TextInput>
                 <DatePickerInput   {...form.getInputProps('diagnosis_date')}  name="diagnosis_date"  placeholder="Enter Diagnosis Date" ></DatePickerInput>
                 

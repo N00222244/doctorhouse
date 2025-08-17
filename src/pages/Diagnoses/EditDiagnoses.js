@@ -1,11 +1,12 @@
 import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
 import { useAuth } from "../../utils/useAuth";
-import { TextInput, NumberInput } from "@mantine/core";
+import { TextInput, NumberInput, Select } from "@mantine/core";
 import { useForm  } from '@mantine/form';
 import { showNotification } from "@mantine/notifications";
 import { DatePickerInput } from "@mantine/dates";
- 
+import { useState, useEffect } from "react";
+
 
 
 
@@ -16,6 +17,7 @@ const EditDiagnoses = () => {
     const navigate = useNavigate();
     const { token } = useAuth();
     const {id} = useParams();
+    const [patients, setPatients] = useState([]);
    // console.log("Token before post request is sent:", token); <-- Kept geting 401 error 
    // needed to see what actually was being sent when token was called from use auth
    // turns out the whole object was and forgot to destructure it oopsie daisies
@@ -26,8 +28,8 @@ const EditDiagnoses = () => {
     const form = useForm({
         initialValues:{
         patient_id: '',
-        condistion: '',
-        diagnoses_date: ''
+        condition: '',
+        diagnosis_date: ''
         
         
         },
@@ -36,17 +38,38 @@ const EditDiagnoses = () => {
         },
     });
 
+    useEffect(() => {
+        Promise.all([
+            
+            axios.get("https://fed-medical-clinic-api.vercel.app/patients", {
+                headers: { Authorization: `Bearer ${token}` },
+            }),
+        ])
+            .then(([ patientsRes]) => {
+                
+                setPatients(patientsRes.data);
+            })
+            .catch((err) => console.error("Error fetching patients:", err));
+    }, [token]);
+
 
     
 
 
-    const handleSubmit = () => {
+    const handleSubmit = (values) => {
         
 
         
         console.log('Token value:', token); 
         // sends a post request to the api url with the form data
-        axios.patch(`https://fed-medical-clinic-api.vercel.app/diagnoses/${id}`, form.values, {
+        axios.patch(`https://fed-medical-clinic-api.vercel.app/diagnoses/${id}`, 
+            
+            {
+                patient_id: Number(values.patient_id),
+                diagnosis_date: values.diagnosis_date,
+                condition: values.condition
+            }
+            , {
             headers: {
                 Authorization: `Bearer ${token}`
             }
@@ -57,9 +80,13 @@ const EditDiagnoses = () => {
             console.log(res); //logs response data to console to verify 
             navigate(`/app/diagnoses/${res.data.id}`, { relative: 'path' })
 
+
+            // this loops through the array of patients to give a more personalised and easily read notification to the user
+            const patient = patients.find(patient => patient.id === Number(values.patient_id) )
+
             showNotification({
                 title: 'Diagnoses Edited Succesfully',
-                message: `Diagnoses on ${new Date(res.data.diagnoses_date).toLocaleDateString()}  Edited succesfully.`,
+                message: `Diagnosis for ${patient?.first_name} ${patient?.last_name} Edited succesfully.`,
                 color: 'green',
                 autoClose: 7000
                
@@ -81,9 +108,13 @@ const EditDiagnoses = () => {
             <form onSubmit={form.onSubmit(handleSubmit)}>
 
                 
-                <DatePickerInput  {...form.getInputProps('diagnoses_date')}  name="diagnoses_date"  placeholder="Enter Diagnoses Date" ></DatePickerInput>
+                <DatePickerInput  {...form.getInputProps('diagnosis_date')}  name="diagnosis_date"  placeholder="Enter Diagnosis Date" ></DatePickerInput>
                 <TextInput    {...form.getInputProps('condition')}  name="condition"  placeholder="Enter Condition" ></TextInput>
-                <NumberInput   {...form.getInputProps('patient_id')}  name="patient_id"  placeholder="Enter Patient ID" ></NumberInput>
+                <Select label="Patient" placeholder="Select a patient" 
+                data={patients.map((patient) => ({
+                        value: String(patient.id), 
+                        label: `${patient.first_name} ${patient.last_name}`,
+                    }))}{...form.getInputProps("patient_id")}/>
                
                 <button type="submit">Edit Diagnoses</button> 
             </form>
