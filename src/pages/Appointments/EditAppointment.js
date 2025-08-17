@@ -5,6 +5,9 @@ import { TextInput, NumberInput } from "@mantine/core";
 import { useForm  } from '@mantine/form';
 import { showNotification } from "@mantine/notifications";
 import { DatePickerInput } from "@mantine/dates";
+
+import { useState, useEffect } from "react";
+import { Select } from "@mantine/core";
  
 
 
@@ -16,6 +19,9 @@ const EditAppointment = () => {
     const navigate = useNavigate();
     const { token } = useAuth();
     const {id} = useParams();
+
+    const [doctors,setDoctors] = useState([]);
+    const [patients,setPatients] = useState([]);
    // console.log("Token before post request is sent:", token); <-- Kept geting 401 error 
    // needed to see what actually was being sent when token was called from use auth
    // turns out the whole object was and forgot to destructure it oopsie daisies
@@ -35,13 +41,39 @@ const EditAppointment = () => {
     });
 
 
-    const handleSubmit = () => {
+
+    useEffect(() => {
+        Promise.all([
+            axios.get("https://fed-medical-clinic-api.vercel.app/doctors", {
+                headers: { Authorization: `Bearer ${token}` },
+            }),
+            axios.get("https://fed-medical-clinic-api.vercel.app/patients", {
+                headers: { Authorization: `Bearer ${token}` },
+            }),
+        ])
+            .then(([doctorsRes, patientsRes]) => {
+                setDoctors(doctorsRes.data);
+                setPatients(patientsRes.data);
+            })
+            .catch((err) => console.error("Error fetching doctors or patients:", err));
+    }, [token]);
+
+
+    const handleSubmit = (values) => {
         
 
         
         console.log('Token value:', token); 
         // sends a post request to the api url with the form data
-        axios.patch(`https://fed-medical-clinic-api.vercel.app/appointment/${id}`, form.values, {
+        axios.patch(`https://fed-medical-clinic-api.vercel.app/appointment/${id}`, 
+            
+            {
+                appointment_date: values.appointment_date,
+                    doctor_id: Number(values.doctor_id),
+                    patient_id: Number(values.patient_id),
+            }
+
+            , {
             headers: {
                 Authorization: `Bearer ${token}`
             }
@@ -77,10 +109,23 @@ const EditAppointment = () => {
 
                 
                 <DatePickerInput  {...form.getInputProps('appointment_date')}  name="appointment_date"  placeholder="Enter Appointment Date" ></DatePickerInput>
-                <NumberInput  type='number'  {...form.getInputProps('doctor_id')}  name="doctor_id"  placeholder="Enter Docotor ID " ></NumberInput>
-                <NumberInput  type='number'  {...form.getInputProps('patient_id')}  name="patient_id"  placeholder="Enter Patient ID" ></NumberInput>
-               
-                <button type="submit">Create Patient</button> 
+                
+                <Select label="Doctor" placeholder="Select a doctor" data={doctors.map((doctor) => ({
+                                    value: String(doctor.id), 
+                                    label: `Dr. ${doctor.first_name} ${doctor.last_name}`,
+                                }))} 
+                                {...form.getInputProps("doctor_id")}/>
+                
+                <Select label="Patient" placeholder="Select a patient" data={patients.map((patient) => ({
+                                    value: String(patient.id), 
+                                    label: `${patient.first_name} ${patient.last_name}`,
+                                }))}
+                                {...form.getInputProps("patient_id")}/>
+                
+
+
+
+                <button type="submit">Edit Appointment</button> 
             </form>
 
 

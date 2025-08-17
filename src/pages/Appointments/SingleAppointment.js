@@ -3,7 +3,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useAuth } from "../../utils/useAuth";
 import axios from "axios";
 import { useState, useEffect } from "react";
-import { Button } from "@mantine/core";
+import { Button, Divider } from "@mantine/core";
 
 
 
@@ -14,8 +14,8 @@ const SingleAppointment = () => {
     const  [appointment, setAppointment] = useState(null); // set the Appointment state
     const {id} = useParams(); // grabs id from the url defiend as :id within app.js 
     const navigate = useNavigate();
-    const [doctors, setDoctors] = useState([]);
-    const [patients, setPatients] = useState([]);
+    const [doctor, setDoctor] = useState([]);
+    const [patient, setPatient] = useState([]);
 
 
 
@@ -26,9 +26,20 @@ const SingleAppointment = () => {
             },
         }) 
         .then((res) => {
-            console.log(res.data); //when succesful log the response data to the console to chekc its there
-            setAppointment(res.data); // store data wtihin set docotr to update teh state
-        })
+                setAppointment(res.data);
+                return Promise.all([
+                    axios.get(`https://fed-medical-clinic-api.vercel.app/doctors/${res.data.doctor_id}`, {
+                        headers: { Authorization: `Bearer ${token}` },
+                    }),
+                    axios.get(`https://fed-medical-clinic-api.vercel.app/patients/${res.data.patient_id}`, {
+                        headers: { Authorization: `Bearer ${token}` },
+                    }),
+                ]);
+            })
+            .then(([doctorRes, patientRes]) => {
+                setDoctor(doctorRes.data);
+                setPatient(patientRes.data);
+            })
         .catch((err) => {
             console.log(err)
         });
@@ -69,8 +80,15 @@ const SingleAppointment = () => {
 
         <h2>Appointment ID: {appointment.id}</h2>
         <h2>Appointment Date: {new Date(appointment.appointment_date * 1000).toLocaleDateString()}</h2>
-        <h2>Patient ID: {appointment.patient_id}</h2>
-        <h2>Doctors ID: {appointment.doctor_id}</h2>
+        <Divider></Divider>
+        <h3>Patient ID: {appointment.patient_id}</h3>
+        <h2>Patient: {patient.first_name} {patient.last_name}</h2>
+        <Divider></Divider>
+        <h3>Doctors ID: {appointment.doctor_id}</h3>
+        <h2>Doctor: {doctor.first_name} {doctor.last_name}</h2>
+        
+        
+        
         
 
 
