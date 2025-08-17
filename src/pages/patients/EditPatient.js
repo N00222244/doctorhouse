@@ -5,7 +5,7 @@ import { TextInput } from "@mantine/core";
 import { useForm  } from '@mantine/form';
 import { showNotification } from "@mantine/notifications";
 import { useEffect } from "react";
- 
+import { DatePickerInput } from "@mantine/dates";
 
 
 
@@ -105,7 +105,7 @@ const EditPatient = () => {
                 <TextInput   type='text'  {...form.getInputProps('last_name')} name="last_name" placeholder="Enter Last name" ></TextInput>
                 <TextInput   type='email' {...form.getInputProps('email')} name="email" placeholder="Enter Email"></TextInput>
                 <TextInput  type='phone' {...form.getInputProps('phone')} name="phone" placeholder="Enter Phone"></TextInput>
-                <TextInput  type='date_of_birth' {...form.getInputProps('date_of_birth')} name="date_of_birth" placeholder="Enter Date of Birth"></TextInput>
+                <DatePickerInput   {...form.getInputProps('date_of_birth')} name="date_of_birth" placeholder="Enter Date of Birth"></DatePickerInput>
                 <TextInput  type='address' {...form.getInputProps('address')} name="address" placeholder="Enter Address"></TextInput>
                
                 <button type="submit">Edit Patient</button> 
