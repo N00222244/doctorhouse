@@ -59,45 +59,11 @@ const HomePage = () =>{
 
     return (
         <div >
-            <AppShell padding="md" header={{ height: 60 }} navbar={{width: 300,breakpoint: 'sm',collapsed: { mobile: !opened }}}  >
-
-
-
-            <AppShell.Header >
-                <Burger opened={opened} onClick={toggle} hiddenFrom="sm" size="sm" color="black"/>
-                    
-                        <Text>Princeton Plainsbourough Medical Centre </Text>
-                    
-            </AppShell.Header>
-            <Divider my="md"/>
-
+            
             
 
 
-            <AppShell.Navbar >navbar tester
-
-
-
-                {/* logout button */}
-            {
-                    token && (
-                        <Button color='red' variant={'outline'} onClick={() => {
-                            logout();
-                            navigate('/login', { replace: true })
-                        }}>Logout</Button>
-                    )
-                }
-
-
-
-                <Button onClick={() => navigate(`../appointments`)}>View Appointments</Button>
-                 <Button onClick={() => navigate(`../diagnoses`)}>View Diagnoses</Button>
-                 <Button onClick={() => navigate(`../prescriptions`)}>View Prescriptions</Button>
-            </AppShell.Navbar>
             
-
-
-            <AppShell.Main>
                 <h2>Docotrs</h2>
                     <button onClick={() => navigate(`../doctors/create`)}>Create New Doctor</button>
                         <SimpleGrid cols={{sm:1, md:2, lg:3, xl:4}}>
@@ -128,7 +94,7 @@ const HomePage = () =>{
 
                             </SimpleGrid>
 
-            </AppShell.Main>
+            
 
 
             
@@ -138,7 +104,7 @@ const HomePage = () =>{
         
 
 
-            </AppShell>
+            
         </div>
     )
 

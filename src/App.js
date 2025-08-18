@@ -16,6 +16,7 @@ import '@mantine/core/styles.css';
 import LoginForm from "./components/LoginForm";
 import RegisterForm from "./components/RegisterForm";
 import ProtectedRoute from "./components/ProtectedRoutes";
+import AppLayout from "./components/AppLayout";
 
 
 
@@ -52,6 +53,7 @@ import SinglePrescription from "./pages/prescriptions/SinglePrescription";
 import EditPrescription from "./pages/prescriptions/EditPrescription";
 
 
+
 const App = () =>{
     return (
 
@@ -69,7 +71,11 @@ const App = () =>{
 
 
                         {/* These Routes are protected and need a valid token to navigated through */}
-                        <Route path="/app" element={<ProtectedRoute/>}>
+                        <Route path="/app" element={
+                            <ProtectedRoute>
+                            <AppLayout/>
+                            </ProtectedRoute>
+                            }>
                         
                         
 

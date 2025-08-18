@@ -1,5 +1,6 @@
 import { Outlet, Navigate } from 'react-router-dom'
 import { useAuth } from '../utils/useAuth'
+import AppLayout from './AppLayout';
 
 // Outlet acts as a placeholder for child routes
 // We've created a protected 'parent' route at '/' which returns this ProtectedRoute
@@ -21,7 +22,7 @@ const ProtectedRoute = () => {
     }
 
     return (
-        <Outlet />
+        <AppLayout/>
     )
 
 }
