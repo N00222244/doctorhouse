@@ -70,6 +70,9 @@ const CreateAppointment = () => {
         
         //console.log('Token value:', token); 
 
+
+        
+
         // sends a post request to the api url with the form data
         axios.post(`https://fed-medical-clinic-api.vercel.app/appointments`, 
             {
@@ -87,9 +90,13 @@ const CreateAppointment = () => {
             console.log(res); //logs response data to console to verify 
             navigate(`../${res.data.id}`, { relative: 'path' })
 
+
+            const patient = patients.find(patient => patient.id === Number(values.patient_id) )
+
+
             showNotification({
                 title: 'Appointment Created Succesfully',
-                message: `Appointment on ${res.data.appointment_date}  booked succesfully.`,
+                message: `Appointment for ${patient?.first_name} ${patient?.last_name}  booked succesfully.`,
                 color: 'green',
                 autoClose: 7000
                 

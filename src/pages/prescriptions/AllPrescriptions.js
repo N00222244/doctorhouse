@@ -14,6 +14,7 @@ const Prescriptions = () =>{
     
     
     const [prescriptions, setPrescriptions] = useState([]);
+    const [patients, setPatients] = useState([]);
     
 
 
@@ -29,6 +30,8 @@ const Prescriptions = () =>{
                         Authorization: `Bearer ${token}`,
                     },
                 })
+
+                
             setPrescriptions(res.data)
         }
         catch(e){
@@ -62,12 +65,8 @@ const Prescriptions = () =>{
                                     <div>
                                         <h2> Prescription ID: {prescription.id}</h2>
                                         <h2> Patient ID: {prescription.patient_id}</h2>
-                                        <h2> Doctor ID: {prescription.doctor_id}</h2>
-                                        <h2> Diagnosis ID: {prescription.diagnosis_id}</h2>
-                                        <h2> Medication: {prescription.medication}</h2>
-                                        <h2> Dosage: {prescription.dosage}</h2>
-                                        <h2> Start Date: {new Date(prescription.start_date * 1000).toLocaleDateString()}</h2>
-                                        <h2> End Date: {new Date(prescription.end_date * 1000).toLocaleDateString()}</h2>
+                                        
+                                        
                                         <button onClick={() => navigate(`../prescriptions/${prescription.id}`)}>View Prescription</button>
                                     </div>
                                     </Card>
