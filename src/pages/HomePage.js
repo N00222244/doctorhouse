@@ -4,6 +4,9 @@ import { useAuth } from "../utils/useAuth";
 import axios from "axios";
 import { useState, useEffect } from "react";
 import { useDisclosure } from "@mantine/hooks";
+import theme from "../assets/StyleTheme";
+import { IconUsersGroup } from '@tabler/icons-react';
+
 
 
 
@@ -64,7 +67,7 @@ const HomePage = () =>{
 
 
             
-                <h2>Docotrs</h2>
+                <h2 style={{ color: theme.colors.PageColours[4]}}>Doctors</h2>
                     <button onClick={() => navigate(`../doctors/create`)}>Create New Doctor</button>
                         <SimpleGrid cols={{sm:1, md:2, lg:3, xl:4}}>
                     {/* checks if there are doctors then maps each doctor in the array and displays them as designed within the return statement */}
@@ -81,7 +84,7 @@ const HomePage = () =>{
 
                 <Divider my="md"/>
 
-                <h2>Patients</h2>
+                <h2>Patients <IconUsersGroup size={24} stroke={1.5} /></h2>
                 <button onClick={() => navigate(`../patients/create`)}>Create New Patient</button>
                             <SimpleGrid cols={{sm:1, md:2, lg:3, xl:4}}>
                                 {patients && patients.map((patient) =>{

@@ -7,7 +7,7 @@ import { Notifications } from '@mantine/notifications';
 import '@mantine/notifications/styles.css';
 import '@mantine/dates/styles.css';
 import '@mantine/core/styles.css';
-
+import theme from "./assets/StyleTheme";
 
 
 
@@ -24,6 +24,7 @@ import AppLayout from "./components/AppLayout";
 //page imports 
 import LandingPage from "./pages/LandingPage";
 import HomePage from "./pages/HomePage";
+
 //doctor
 import SingleDoctor from "./pages/doctors/SingleDoctor";
 import CreateDocotor from "./pages/doctors/CreateDoctor";
@@ -54,12 +55,13 @@ import EditPrescription from "./pages/prescriptions/EditPrescription";
 
 
 
+
 const App = () =>{
     return (
 
         <div>
             <AuthProvider>
-                <MantineProvider withGlobalStyles withNormalizeCSS>
+                <MantineProvider theme={theme} withNormalizeCSS>
                     <Notifications position="bottom-right"  /> 
                 <Router>
 
@@ -68,6 +70,11 @@ const App = () =>{
 
                         {/* Landing Page Route */}
                         <Route path="/" element={<LandingPage />} />
+                        {/* Public routes any user can access */}
+                        <Route path="/login" element={<LoginForm />} />
+                        <Route path="/register" element={<RegisterForm />} />
+                        
+
 
 
                         {/* These Routes are protected and need a valid token to navigated through */}
@@ -113,9 +120,7 @@ const App = () =>{
 
 
 
-                        {/* Public routes any user can access */}
-                        <Route path="/login" element={<LoginForm />} />
-                        <Route path="/register" element={<RegisterForm />} />
+                        
                         
                     </Routes>
 
