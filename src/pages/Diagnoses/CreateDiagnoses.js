@@ -6,6 +6,7 @@ import { useForm  } from '@mantine/form';
 import { showNotification } from "@mantine/notifications";
 import { DatePickerInput } from "@mantine/dates";
 import { useEffect, useState } from "react";
+import BackButton from "../../components/BackButton";
 
  
 
@@ -96,6 +97,8 @@ const CreateDiagnoses = () => {
     
     return (
         <div>
+
+            <BackButton/>
 
             <form onSubmit={form.onSubmit(handleSubmit)}>
 

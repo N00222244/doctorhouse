@@ -4,6 +4,7 @@ import { useAuth } from "../../utils/useAuth";
 import axios from "axios";
 import { useState, useEffect } from "react";
 import { Button, Divider } from "@mantine/core";
+import BackButton from "../../components/BackButton";
 
 
 
@@ -75,6 +76,8 @@ const SingleAppointment = () => {
     
     return appointment && (
         <>
+
+        <BackButton/>
 
         
 

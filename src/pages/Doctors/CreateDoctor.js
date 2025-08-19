@@ -4,6 +4,7 @@ import { useAuth } from "../../utils/useAuth";
 import { Select, TextInput } from "@mantine/core";
 import { useForm  } from '@mantine/form';
 import { showNotification } from "@mantine/notifications";
+import BackButton from "../../components/BackButton";
  
 
 
@@ -104,6 +105,8 @@ const CreateDocotor = () => {
     
     return (
         <div>
+
+            <BackButton/>
 
             <form onSubmit={form.onSubmit(handleSubmit)}>
 

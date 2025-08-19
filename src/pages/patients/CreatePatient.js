@@ -5,7 +5,7 @@ import { TextInput } from "@mantine/core";
 import { useForm  } from '@mantine/form';
 import { showNotification } from "@mantine/notifications";
 import { DatePicker, DatePickerInput } from "@mantine/dates";
- 
+import BackButton from "../../components/BackButton";
 
 
 
@@ -77,6 +77,8 @@ const CreatePatient = () => {
     
     return (
         <div>
+
+            <BackButton/>
 
             <form onSubmit={form.onSubmit(handleSubmit)}>
 

@@ -8,6 +8,7 @@ import { DatePickerInput } from "@mantine/dates";
 import { useEffect, useState } from "react";
 
 import { Select } from "@mantine/core";
+import BackButton from "../../components/BackButton";
 
  
 
@@ -113,6 +114,8 @@ const CreateAppointment = () => {
     
     return (
         <div>
+
+            <BackButton/>
 
             <form onSubmit={form.onSubmit(handleSubmit)}>
 

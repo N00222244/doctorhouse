@@ -1,4 +1,4 @@
-import { Button, SimpleGrid , AppShell, Burger, Divider,Text} from "@mantine/core";
+import { Button, SimpleGrid , AppShell, Burger, Divider,Text, Card, CardSection} from "@mantine/core";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../utils/useAuth";
 import axios from "axios";
@@ -86,13 +86,36 @@ const HomePage = () =>{
 
                 <h2>Patients <IconUsersGroup size={24} stroke={1.5} /></h2>
                 <button onClick={() => navigate(`../patients/create`)}>Create New Patient</button>
-                            <SimpleGrid cols={{sm:1, md:2, lg:3, xl:4}}>
+                            <SimpleGrid cols={{sm:1, md:2, lg:3, xl:4}} style={{alignItems: "stretch"}}>
                                 {patients && patients.map((patient) =>{
                                 return(
                                     <div>
-                                        <h2> {patient.first_name}{patient.last_name}</h2>
-                                        <button onClick={() => navigate(`../patients/${patient.id}`)}>View Patient</button>
+
+                                        <Card onClick={() => navigate(`../patients/${patient.id}`)}
+                                         shadow="sm" padding="xl" style={{ height: "100%", display: "flex", flexDirection: "column", justifyContent: "space-between"}}>
+                                            
+
+                                            <Text fw={500} size="lg" mt="md">
+                                                {patient.first_name}{patient.last_name}
+                                            </Text>
+
+                                            <Text fw={500} size="md" mt="md">
+                                                Phone No: <br/> {patient.phone}
+                                            </Text>
+
+                                            <Text fw={500} size="md" mt="md">
+                                                Address: <br/>
+                                                {patient.address}
+                                            </Text>
+
+
+                                            
+                                        </Card> 
+
+                                        
                                     </div>
+
+                                    
                             )})}
 
                             </SimpleGrid>

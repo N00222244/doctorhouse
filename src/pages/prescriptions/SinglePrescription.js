@@ -5,6 +5,8 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 import { Button, Divider } from "@mantine/core";
 
+import BackButton from "../../components/BackButton";
+
 
 
 const SinglePrescription = () => {
@@ -86,7 +88,7 @@ const SinglePrescription = () => {
         
 
 
-        
+        <BackButton/>
         
         <h2>Prescription ID: {prescription.id}</h2>
         <h2>Patient ID: {prescription.patient_id}</h2>

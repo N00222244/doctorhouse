@@ -7,6 +7,7 @@ import { showNotification } from "@mantine/notifications";
 import { DatePickerInput } from "@mantine/dates";
 import { Select } from "@mantine/core";
 import { useState, useEffect } from "react";
+import BackButton from "../../components/BackButton";
  
 
 
@@ -118,6 +119,8 @@ const EditPrescription = () => {
     
     return (
         <div>
+
+            <BackButton/>
 
             <form onSubmit={form.onSubmit(handleSubmit)}>
 

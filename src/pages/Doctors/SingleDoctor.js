@@ -4,6 +4,7 @@ import { useAuth } from "../../utils/useAuth";
 import axios from "axios";
 import { useState, useEffect } from "react";
 import { Button } from "@mantine/core";
+import BackButton from "../../components/BackButton";
 
 
 
@@ -55,6 +56,7 @@ const SingleDoctor = () => {
     
     return doctor && (
         <>
+        <BackButton/>
 
         <h2>Doctor ID: {doctor.id}</h2>
         <h1>Full Name: DR {doctor.first_name} {doctor.last_name}</h1>

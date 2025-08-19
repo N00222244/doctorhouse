@@ -6,6 +6,7 @@ import { useForm  } from '@mantine/form';
 import { showNotification } from "@mantine/notifications";
 import { useEffect } from "react";
 import { useParams } from "react-router-dom";
+import BackButton from "../../components/BackButton";
 
 
 
@@ -134,6 +135,8 @@ const EditDoctor = () => {
     
     return (
         <div>
+
+            <BackButton/>
 
             <form onSubmit={form.onSubmit(handleSubmit)}>
 

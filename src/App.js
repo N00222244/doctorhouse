@@ -8,6 +8,7 @@ import '@mantine/notifications/styles.css';
 import '@mantine/dates/styles.css';
 import '@mantine/core/styles.css';
 import theme from "./assets/StyleTheme";
+import '@fontsource/inter/600.css';
 
 
 
