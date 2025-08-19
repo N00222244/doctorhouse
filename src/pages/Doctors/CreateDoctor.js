@@ -1,10 +1,11 @@
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../utils/useAuth";
-import { Select, TextInput } from "@mantine/core";
+import { Select, Stack, TextInput, Text, Paper, Container } from "@mantine/core";
 import { useForm  } from '@mantine/form';
 import { showNotification } from "@mantine/notifications";
 import BackButton from "../../components/BackButton";
+import FormBox from "../../components/FormBox";
  
 
 
@@ -106,9 +107,23 @@ const CreateDocotor = () => {
     return (
         <div>
 
+
+            
+            <Text>Create a New Doctor</Text>
             <BackButton/>
+            
+            
 
             <form onSubmit={form.onSubmit(handleSubmit)}>
+
+
+
+            <Container style={{
+        border: "1px solid black", // black outline
+        padding: "20px",           // optional padding
+      }}>
+                
+                <Stack>
 
                 
                 <TextInput  type='text'  {...form.getInputProps('first_name')}  name="first_name"  placeholder="Enter First name" ></TextInput>
@@ -116,11 +131,7 @@ const CreateDocotor = () => {
                 <TextInput   type='email' {...form.getInputProps('email')} name="email" placeholder="Enter Email"></TextInput>
                 <TextInput  type='phone' {...form.getInputProps('phone')} name="phone" placeholder="Enter Phone"></TextInput>
                
-                {/* this is a mantine component that uses a select box to provide users with the only possible options for
-                 the specilisation, it maps the values from the predefined specialisation arry that defined from above */}
-                {/* <select name='specialisation' label="Specialisation" placeholder="Pick one" 
-                data={specialisations.map(specialisation => ({ value: specialisation, label: specialisation }))} 
-                {...form.getInputProps('specialisation')} />  */}
+                
 
                 
 
@@ -130,10 +141,8 @@ const CreateDocotor = () => {
                         id="specialisation-select" // Use an ID for the label to link
                         value={form.values.specialisation} // Controlled by form.values
                         onChange={(e) => form.setFieldValue('specialisation', e.target.value)} // Updates form state
-                        // No need for name or {...form.getInputProps('specialisation')} here
-                    >
-                        {/* Optionally, add a disabled default option if "Pick one" isn't a valid value */}
-                        {/* <option value="" disabled>Pick one</option> */}
+                        >
+                      
                         {specialisations.map((specialisation) => (
                             <option key={specialisation} value={specialisation}>
                                 {specialisation}
@@ -143,14 +152,15 @@ const CreateDocotor = () => {
                 </div>
 
                 
-                
-
-
-                
-                {/* <input onChange={handleChange} value={form.specialisation} type='specialisation' name="specialisation" placeholder="Enter your specialisation"></input> */}
                 <button type="submit">Create Docotor</button>
+
+                </Stack>
+                
+            </Container>
                 
             </form>
+
+            
 
 
         </div>

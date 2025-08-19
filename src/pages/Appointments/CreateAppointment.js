@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../utils/useAuth";
-import { TextInput, NumberInput, Divider } from "@mantine/core";
+import { TextInput, NumberInput, Divider, Stack } from "@mantine/core";
 import { useForm  } from '@mantine/form';
 import { showNotification } from "@mantine/notifications";
 import { DatePickerInput } from "@mantine/dates";
@@ -9,6 +9,7 @@ import { useEffect, useState } from "react";
 
 import { Select } from "@mantine/core";
 import BackButton from "../../components/BackButton";
+import FormBox from "../../components/FormBox";
 
  
 
@@ -39,7 +40,11 @@ const CreateAppointment = () => {
         patient_id: ''
         },
          validate: {
-           
+            appointment_date: (value) => (value ? null : "startdate is required"),
+            patient_id: (value) => (value ? null : "Patient selection is required"),
+            doctor_id: (value) => (value ? null : "Doctor selection is required"),
+            
+            
         },
     });
 
@@ -117,17 +122,22 @@ const CreateAppointment = () => {
 
             <BackButton/>
 
+            <FormBox>
+
             <form onSubmit={form.onSubmit(handleSubmit)}>
 
+
+                <Stack>
+
                 
-                <DatePickerInput   {...form.getInputProps('appointment_date')}  name="appointment_date"  placeholder="Enter Appointment Date" ></DatePickerInput>
+                <DatePickerInput label="Enter Appointment Date"  {...form.getInputProps('appointment_date')}  name="appointment_date"  placeholder="Enter Appointment Date" ></DatePickerInput>
                 <Select label="Doctor" placeholder="Select a doctor" data={doctors.map((doctor) => ({
                     value: String(doctor.id), 
                     label: `Dr. ${doctor.first_name} ${doctor.last_name}`,
                 }))} 
                 {...form.getInputProps("doctor_id")}/>
 
-                <Select label="Patient" placeholder="Select a patient" data={patients.map((patient) => ({
+                <Select label="Patient" placeholder="Select a patient." data={patients.map((patient) => ({
                     value: String(patient.id), 
                     label: `${patient.first_name} ${patient.last_name}`,
                 }))}
@@ -138,7 +148,11 @@ const CreateAppointment = () => {
                 
                
                 <button type="submit">Create Appointment</button> 
+
+                </Stack>
             </form>
+
+            </FormBox>
 
 
         </div>

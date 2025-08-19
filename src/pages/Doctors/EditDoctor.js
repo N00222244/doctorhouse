@@ -1,12 +1,13 @@
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../utils/useAuth";
-import { Select, TextInput } from "@mantine/core";
+import { Select, Stack, TextInput } from "@mantine/core";
 import { useForm  } from '@mantine/form';
 import { showNotification } from "@mantine/notifications";
 import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import BackButton from "../../components/BackButton";
+import FormBox from "../../components/FormBox";
 
 
 
@@ -88,7 +89,7 @@ const EditDoctor = () => {
 
             showNotification({
                 title: 'Doctor Edited Succesfully',
-                message: `Doctor ${res.data.first_name} ${res.data.last_name} created.`,
+                message: `Doctor ${res.data.first_name} ${res.data.last_name} Has Been Edited.`,
                 color: 'green',
                 autoClose: 7000
                 
@@ -138,7 +139,12 @@ const EditDoctor = () => {
 
             <BackButton/>
 
+            <FormBox>
+
             <form onSubmit={form.onSubmit(handleSubmit)}>
+
+
+                <Stack>
 
                 
                 <TextInput  type='text'  {...form.getInputProps('first_name')}  name="first_name"  placeholder="Enter First name" ></TextInput>
@@ -179,8 +185,13 @@ const EditDoctor = () => {
                 
                 {/* <input onChange={handleChange} value={form.specialisation} type='specialisation' name="specialisation" placeholder="Enter your specialisation"></input> */}
                 <button type="submit">Submit</button>
+
+
+                </Stack>
                 
             </form>
+
+            </FormBox>
 
 
         </div>

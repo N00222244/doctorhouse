@@ -33,6 +33,9 @@ const CreateDiagnoses = () => {
         diagnosis_date: ''
         },
          validate: {
+            patient_id: (value) => (value ? null : "Patient selection is required"),
+            condition: (value) => (value ? null : "Medication is required"),
+            diagnosis_date: (value) => (value ? null : "startdate is required"),
            
         },
     });

@@ -41,6 +41,13 @@ const EditPrescription = () => {
         end_date : ''
         },
          validate: {
+            patient_id: (value) => (value ? null : "Patient selection is required"),
+            doctor_id: (value) => (value ? null : "Doctor selection is required"),
+            diagnosis_id: (value) => (value ? null : "Diagnosis selection is required"),
+            medication: (value) => (value ? null : "Medication is required"),
+            dosage: (value) => (value ? null : "Dosage is required"),
+            start_date: (value) => (value ? null : "startdate is required"),
+            end_date: (value) => (value ? null : "end date is required"),
            
         },
     });
