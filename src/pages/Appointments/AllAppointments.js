@@ -1,4 +1,4 @@
-import { Button, SimpleGrid , Card } from "@mantine/core";
+import { Button, SimpleGrid , Card, Text, Title } from "@mantine/core";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../utils/useAuth";
 import axios from "axios";
@@ -53,18 +53,27 @@ const Appointments = () =>{
 
     return (
         <>
-           <h2>Appointments</h2>
-                <button onClick={() => navigate(`../appointments/create`)}>Create New Appointment</button>
+           <Title order={1} fw={700} >Appointments</Title>
+                <Button mb={20} onClick={() => navigate(`../appointments/create`)}>Create New Appointment</Button>
                             <SimpleGrid cols={{sm:1, md:2, lg:3, xl:4}}>
                                 {appointments && appointments.map((appointment) =>{
                                 return(
-                                    <Card shadow="sm" padding="lg" radius="md" withBorder>
-                                    <div>
-                                        <h2> Date: {new Date(appointment.appointment_date * 1000).toLocaleDateString()}</h2>
-                                        <h2> Patient: {appointment.patient_id}</h2>
-                                        <button onClick={() => navigate(`../appointments/${appointment.id}`)}>View Appointment</button>
-                                    </div>
-                                    </Card>
+                                    <>
+                                    <Card onClick={() => navigate(`../appointments/${appointment.id}`)}
+                                            shadow="sm" padding="lg" radius="md" withBorder style={{height: "100%"}}>
+
+                                            <Text fw={500}  size="md">
+                                                Date: <br/> {new Date(appointment.appointment_date * 1000).toLocaleDateString()}
+                                            </Text>
+                                            
+                                            <Text fw={500} size="md" mt="md" >
+                                               Patient: <br/> {appointment.patient_id}
+                                            </Text>
+
+                                        </Card> 
+
+
+                                    </>
                             )})}
 
                             </SimpleGrid>

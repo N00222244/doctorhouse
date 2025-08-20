@@ -11,6 +11,8 @@ import { Navbar as MantineNavbar, Button, Fieldset , TextInput} from '@mantine/c
 
 const LandingPage = () => {
 
+    
+
 
 
     return (

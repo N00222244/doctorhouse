@@ -5,7 +5,7 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 import { useDisclosure } from "@mantine/hooks";
 import theme from "../assets/StyleTheme";
-import { IconUsersGroup } from '@tabler/icons-react';
+import { IconUsersGroup, IconNurse } from '@tabler/icons-react';
 
 
 
@@ -68,7 +68,7 @@ const HomePage = () =>{
 
 
             
-                <Title fw={700} order={1} mt={20}>Doctors</Title>
+                <Title fw={700} order={1} mt={20}>Doctors <IconNurse size={24} stroke={1.5} /> </Title>
 
 
                     <Button mb={20} onClick={() => navigate(`../doctors/create`)}>Create New Doctor</Button>

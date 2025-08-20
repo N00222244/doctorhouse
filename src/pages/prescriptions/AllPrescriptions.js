@@ -1,4 +1,4 @@
-import { Button, SimpleGrid , Card } from "@mantine/core";
+import { Button, SimpleGrid , Card, Text, Title,Group } from "@mantine/core";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../utils/useAuth";
 import axios from "axios";
@@ -56,20 +56,43 @@ const Prescriptions = () =>{
 
     return (
         <>
-           <h2>Prescriptions</h2>
-                <button onClick={() => navigate(`../prescriptions/create`)}>Create New Prescription</button>
+           <Title order={1} fw={700} mt={20} >Prescriptions</Title>
+                <Button mb={20} onClick={() => navigate(`../prescriptions/create`)}>Create New Prescription</Button>
                             <SimpleGrid cols={{sm:1, md:2, lg:3, xl:4}}>
                                 {prescriptions && prescriptions.map((prescription) =>{
                                 return(
-                                    <Card shadow="sm" padding="lg" radius="md" withBorder>
-                                    <div>
-                                        <h2> Prescription ID: {prescription.id}</h2>
-                                        <h2> Patient ID: {prescription.patient_id}</h2>
+                                    
                                         
                                         
-                                        <button onClick={() => navigate(`../prescriptions/${prescription.id}`)}>View Prescription</button>
-                                    </div>
-                                    </Card>
+                                        
+
+
+                                    <Card onClick={() => navigate(`../prescriptions/${prescription.id}`)}
+                                            shadow="sm" padding="lg" radius="md" withBorder style={{height: "100%"}}>
+                                            
+                                            <Text fw={500} size="md" >
+                                                Medication: <br/> {prescription.medication}
+                                            </Text>
+
+                                            <Text fw={500} size="md" mt="md" >
+                                                Dosage: <br/> {prescription.dosage}
+                                            </Text>
+
+                                            <Group>
+                                            <Text fw={500}  size="xs" mt="md">
+                                               Start Date: <br/> {new Date(prescription.start_date * 1000).toLocaleDateString()}
+                                            </Text>
+
+                                            <Text fw={500}  size="xs" mt="md">
+                                               End Date: <br/> {new Date(prescription.end_date * 1000).toLocaleDateString()}
+                                            </Text>
+                                            </Group>
+
+                                        </Card>
+
+
+                                    
+                                    
                             )})}
 
                             </SimpleGrid>

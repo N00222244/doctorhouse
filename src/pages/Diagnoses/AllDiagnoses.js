@@ -1,4 +1,4 @@
-import { Button, SimpleGrid , Card } from "@mantine/core";
+import { Button, SimpleGrid , Card , Title, Text} from "@mantine/core";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../utils/useAuth";
 import axios from "axios";
@@ -53,18 +53,25 @@ const Diagnoses = () =>{
 
     return (
         <>
-           <h2>Diagnoses</h2>
-                <button onClick={() => navigate(`../diagnoses/create`)}>Create New Diagnosis</button>
+           <Title order={1} fw={700}>Diagnoses</Title>
+                <Button mb={20} onClick={() => navigate(`../diagnoses/create`)}>Create New Diagnosis</Button>
                             <SimpleGrid cols={{sm:1, md:2, lg:3, xl:4}}>
                                 {diagnoses && diagnoses.map((diagnosis) =>{
                                 return(
-                                    <Card shadow="sm" padding="lg" radius="md" withBorder>
-                                    <div>
-                                        <h2> Date: {new Date(diagnosis.diagnosis_date * 1000).toLocaleDateString()}</h2>
-                                        <h2> Patient: {diagnosis.patient_id}</h2>
-                                        <button onClick={() => navigate(`../diagnoses/${diagnosis.id}`)}>View Diagnosis</button>
-                                    </div>
-                                    </Card>
+                                    <>
+                                    <Card onClick={() => navigate(`../diagnoses/${diagnosis.id}`)}
+                                            shadow="sm" padding="lg" radius="md" withBorder style={{height: "100%"}}>
+
+                                            <Text fw={500}  size="md">
+                                                Condition: <br/> {diagnosis.condition}
+                                            </Text>
+                                            
+                                            <Text fw={500} size="md" mt="md" >
+                                                Diagnosis Date: <br/> {new Date(diagnosis.diagnosis_date * 1000).toLocaleDateString()}
+                                            </Text>
+
+                                        </Card> 
+                                        </>
                             )})}
 
                             </SimpleGrid>
