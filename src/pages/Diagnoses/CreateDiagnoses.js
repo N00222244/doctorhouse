@@ -61,7 +61,7 @@ const CreateDiagnoses = () => {
 
     // mantine autcomplete only takes in  string arrays or obejct arrays 
     // api returns json object so need to map condtion names and make it an array of strings
-    const conditionNames = conditions[3].map(([name]) => name);
+    const conditionNames = conditions[3]?.map(([name]) => name);
 
 
 
@@ -149,7 +149,7 @@ const CreateDiagnoses = () => {
 
 
                 
-                <DatePickerInput   {...form.getInputProps('diagnosis_date')}  name="diagnosis_date"  placeholder="Enter Diagnosis Date" ></DatePickerInput>
+                <DatePickerInput  label="Diagnosis Date" {...form.getInputProps('diagnosis_date')}  name="diagnosis_date"  placeholder="Enter Diagnosis Date" ></DatePickerInput>
                 
                 
 

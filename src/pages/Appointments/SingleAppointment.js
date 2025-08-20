@@ -135,8 +135,8 @@ const SingleAppointment = () => {
         <Divider/>
         
         <Group pt={20}>
-        <Button onClick={() => navigate(`../appointments/${appointment.id}/edit`)}>Edit Appointment</Button>
-        <Button onClick={DeleteAppointment}>Delete Appointment</Button>
+        <Button color="green" onClick={() => navigate(`../appointments/${appointment.id}/edit`)}>Edit Appointment</Button>
+        <Button color="red" onClick={DeleteAppointment}>Delete Appointment</Button>
         </Group>
         
         

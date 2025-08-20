@@ -102,8 +102,8 @@ const SingleDoctor = () => {
         <Divider/>
 
         <Group pt={20}>
-        <Button onClick={() => navigate(`../doctors/${doctor.id}/edit`)}>Edit Doctor</Button>
-        <Button onClick={DeleteDoctor}>Delete Doctor</Button>
+        <Button color="green" onClick={() => navigate(`../doctors/${doctor.id}/edit`)}>Edit Doctor</Button>
+        <Button color="red" onClick={DeleteDoctor}>Delete Doctor</Button>
         </Group>
         
         

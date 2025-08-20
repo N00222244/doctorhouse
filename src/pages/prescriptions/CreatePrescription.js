@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../utils/useAuth";
-import { TextInput, NumberInput, Divider, Stack } from "@mantine/core";
+import { TextInput, NumberInput, Divider, Stack, Autocomplete } from "@mantine/core";
 import { useForm  } from '@mantine/form';
 import { showNotification } from "@mantine/notifications";
 import { DatePickerInput } from "@mantine/dates";
@@ -25,6 +25,7 @@ const CreatePrescription = () => {
     const [patients, setPatient] = useState([]);
     const [doctors, setDoctor] = useState([]);
     const [diagnoses, setDiagnosis] = useState([]);
+    const [medications, setMedications] = useState([]);
 
 
    // console.log("Token before post request is sent:", token); <-- Kept geting 401 error 
@@ -57,9 +58,26 @@ const CreatePrescription = () => {
     });
 
 
-    const handleSearchTerm = () => {
+    
+
+    useEffect(()=> {
+        // ${(form.values.condition) changes the url by adding whatever is typed within the condition form box
+        fetch(`https://clinicaltables.nlm.nih.gov/api/rxterms/v3/search?terms=${(form.values.medication)}`) 
         
-    } 
+        .then((res) => res.json())
+        .then((data) => {
+            setMedications(data);
+        })
+
+        .catch((err) => console.error("Error Fetching Medication", err));
+    }, [form.values.medication])
+
+
+    // had to add chaining so it doenst call map error if its undefined
+    const medicationNames = medications[3]?.map(([name]) => name);
+
+    
+
 
 
     useEffect(() => {
@@ -155,17 +173,19 @@ const CreatePrescription = () => {
                                     label: `${patient.first_name} ${patient.last_name}`,
                                 }))}{...form.getInputProps("patient_id")}/>
                 
-                <Select label="diagnoses" placeholder="Select a Condition" data={diagnoses.map((diagnosis) => ({
+                <Select label="Diagnosis" placeholder="Select a Condition" data={diagnoses.map((diagnosis) => ({
                                     value: String(diagnosis.id), 
                                     label: `${diagnosis.condition}`,
                                 }))}{...form.getInputProps("diagnosis_id")}/>
 
 
                 
-                <TextInput   {...form.getInputProps('medication')}  name="medication"  placeholder="Enter Medication" ></TextInput>
-                <TextInput   {...form.getInputProps('dosage')}  name="dosage"  placeholder="Enter Dosage" ></TextInput>
-                <DatePickerInput   {...form.getInputProps('start_date')}  name="start_date"  placeholder="Enter Prescription Start Date" ></DatePickerInput>
-                <DatePickerInput   {...form.getInputProps('end_date')}  name="end_date"  placeholder="Enter Prescription End Date" ></DatePickerInput>
+                 <Autocomplete label="Medication" placeholder="Start typing a medication..." value={form.values.medication} 
+                                onChange={(val) => form.setFieldValue("medication", val)} data={medicationNames}/>
+                
+                <TextInput label="Dosage"  {...form.getInputProps('dosage')}  name="dosage"  placeholder="Enter Dosage" ></TextInput>
+                <DatePickerInput label="Prescription Start"  {...form.getInputProps('start_date')}  name="start_date"  placeholder="Enter Prescription Start Date" ></DatePickerInput>
+                <DatePickerInput  label="Prescription End" {...form.getInputProps('end_date')}  name="end_date"  placeholder="Enter Prescription End Date" ></DatePickerInput>
               
 
                 <Divider></Divider>

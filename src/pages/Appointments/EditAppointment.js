@@ -118,15 +118,15 @@ const EditAppointment = () => {
                 <Stack>
 
                 
-                <DatePickerInput label="Enter Appointment Date." {...form.getInputProps('appointment_date')}  name="appointment_date"  placeholder="Enter Appointment Date" ></DatePickerInput>
+                <DatePickerInput label="Appointment Date" {...form.getInputProps('appointment_date')}  name="appointment_date"  placeholder="Enter Appointment Date" ></DatePickerInput>
                 
-                <Select label="Select Doctor." placeholder="Select a doctor" data={doctors.map((doctor) => ({
+                <Select label="Doctor" placeholder="Select a doctor" data={doctors.map((doctor) => ({
                                     value: String(doctor.id), 
                                     label: `Dr. ${doctor.first_name} ${doctor.last_name}`,
                                 }))} 
                                 {...form.getInputProps("doctor_id")}/>
                 
-                <Select label="Select Patient." placeholder="Select a patient" data={patients.map((patient) => ({
+                <Select label="Patient" placeholder="Select a patient" data={patients.map((patient) => ({
                                     value: String(patient.id), 
                                     label: `${patient.first_name} ${patient.last_name}`,
                                 }))}

@@ -43,6 +43,7 @@ const AppLayout = () => {
                 <Stack align="center" pt={50}>
                     
                     <Button 
+                        
                         onClick={() => navigate(`/app/appointments`)}
                         w={250}
                         justify="center"

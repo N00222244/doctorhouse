@@ -127,8 +127,8 @@ const SinglePatient = () => {
             <Title fw={700} order={2}>Manage</Title>
         <Divider/>
         <Group pt={20}>
-            <Button onClick={() => navigate(`../patients/${patient.id}/edit`)}>Edit Patient</Button>
-            <Button onClick={DeletePatient}>Delete Patient</Button>
+            <Button color="green" onClick={() => navigate(`../patients/${patient.id}/edit`)}>Edit Patient</Button>
+            <Button color="red" onClick={DeletePatient}>Delete Patient</Button>
         </Group>
         
         

@@ -122,8 +122,8 @@ const SingleDiagnoses = () => {
     
 
         <Group pt={20}>
-            <Button onClick={() => navigate(`../diagnoses/${diagnoses.id}/edit`)}>Edit Diagnosis</Button>
-            <Button onClick={DeleteDiagnoses}>Delete Diagnosis</Button>
+            <Button color="green" onClick={() => navigate(`../diagnoses/${diagnoses.id}/edit`)}>Edit Diagnosis</Button>
+            <Button color="red" onClick={DeleteDiagnoses}>Delete Diagnosis</Button>
         </Group>
         
         

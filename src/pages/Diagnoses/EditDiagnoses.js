@@ -57,7 +57,7 @@ const EditDiagnoses = () => {
         .catch((err) => console.error("Error Fetching Conditions", err));
     }, [form.values.condition])
 
-    const conditionNames = conditions[3].map(([name]) => name);
+    const conditionNames = conditions[3]?.map(([name]) => name);
 
     useEffect(() => {
         Promise.all([
@@ -135,7 +135,7 @@ const EditDiagnoses = () => {
                     <Stack>
 
                 
-                <DatePickerInput  {...form.getInputProps('diagnosis_date')}  name="diagnosis_date"  placeholder="Enter Diagnosis Date" ></DatePickerInput>
+                <DatePickerInput label="Diagnosis Date" {...form.getInputProps('diagnosis_date')}  name="diagnosis_date"  placeholder="Enter Diagnosis Date" ></DatePickerInput>
                 
 
                 <Autocomplete label="Condition" placeholder="Start typing a condition..." value={form.values.condition} 
