@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
 import { useAuth } from "../../utils/useAuth";
-import { TextInput, NumberInput, Select, Stack } from "@mantine/core";
+import { TextInput, NumberInput, Select, Stack, Autocomplete } from "@mantine/core";
 import { useForm  } from '@mantine/form';
 import { showNotification } from "@mantine/notifications";
 import { DatePickerInput } from "@mantine/dates";
@@ -19,6 +19,8 @@ const EditDiagnoses = () => {
     const { token } = useAuth();
     const {id} = useParams();
     const [patients, setPatients] = useState([]);
+
+    const [conditions, setConditions] = useState([])
    // console.log("Token before post request is sent:", token); <-- Kept geting 401 error 
    // needed to see what actually was being sent when token was called from use auth
    // turns out the whole object was and forgot to destructure it oopsie daisies
@@ -41,6 +43,21 @@ const EditDiagnoses = () => {
            
         },
     });
+
+
+    useEffect(()=> {
+
+        fetch(`https://clinicaltables.nlm.nih.gov/api/conditions/v3/search?terms=${(form.values.condition)}`)
+        
+        .then((res) => res.json())
+        .then((data) => {
+            setConditions(data);
+        })
+
+        .catch((err) => console.error("Error Fetching Conditions", err));
+    }, [form.values.condition])
+
+    const conditionNames = conditions[3].map(([name]) => name);
 
     useEffect(() => {
         Promise.all([
@@ -119,7 +136,12 @@ const EditDiagnoses = () => {
 
                 
                 <DatePickerInput  {...form.getInputProps('diagnosis_date')}  name="diagnosis_date"  placeholder="Enter Diagnosis Date" ></DatePickerInput>
-                <TextInput    {...form.getInputProps('condition')}  name="condition"  placeholder="Enter Condition" ></TextInput>
+                
+
+                <Autocomplete label="Condition" placeholder="Start typing a condition..." value={form.values.condition} 
+                onChange={(val) => form.setFieldValue("condition", val)} data={conditionNames}/>
+
+
                 <Select label="Patient" placeholder="Select a patient" 
                 data={patients.map((patient) => ({
                         value: String(patient.id), 

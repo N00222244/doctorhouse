@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../utils/useAuth";
-import { TextInput, NumberInput, Divider, Select, Stack } from "@mantine/core";
+import { TextInput, NumberInput, Divider, Select, Stack, Autocomplete } from "@mantine/core";
 import { useForm  } from '@mantine/form';
 import { showNotification } from "@mantine/notifications";
 import { DatePickerInput } from "@mantine/dates";
@@ -20,6 +20,8 @@ const CreateDiagnoses = () => {
     const navigate = useNavigate();
     const { token } = useAuth();
     const [patients, setPatients] = useState([]);
+
+    const [conditions, setConditions] = useState([])
    // console.log("Token before post request is sent:", token); <-- Kept geting 401 error 
    // needed to see what actually was being sent when token was called from use auth
    // turns out the whole object was and forgot to destructure it oopsie daisies
@@ -40,6 +42,28 @@ const CreateDiagnoses = () => {
            
         },
     });
+
+
+    // this use effect fetches the data from the clinic table api to date for the autfill box when entering conditions.
+
+    useEffect(()=> {
+        // ${(form.values.condition) changes the url by adding whatever is typed within the condition form box
+        fetch(`https://clinicaltables.nlm.nih.gov/api/conditions/v3/search?terms=${(form.values.condition)}`) 
+        
+        .then((res) => res.json())
+        .then((data) => {
+            setConditions(data);
+        })
+
+        .catch((err) => console.error("Error Fetching Conditions", err));
+    }, [form.values.condition])
+
+
+    // mantine autcomplete only takes in  string arrays or obejct arrays 
+    // api returns json object so need to map condtion names and make it an array of strings
+    const conditionNames = conditions[3].map(([name]) => name);
+
+
 
      useEffect(() => {
         Promise.all([
@@ -115,7 +139,16 @@ const CreateDiagnoses = () => {
                     label: `${patient.first_name} ${patient.last_name}`,
                 }))}
                 {...form.getInputProps("patient_id")}/>
-                <TextInput   {...form.getInputProps('condition')}  name="condition"  placeholder="Enter Condition" ></TextInput>
+
+
+                {/* Auto complete box has a data prop which the mapped condtions names is passed in through  */}
+                <Autocomplete label="Condition" placeholder="Start typing a condition..." value={form.values.condition} 
+                onChange={(val) => form.setFieldValue("condition", val)} data={conditionNames}/>
+
+
+
+
+                
                 <DatePickerInput   {...form.getInputProps('diagnosis_date')}  name="diagnosis_date"  placeholder="Enter Diagnosis Date" ></DatePickerInput>
                 
                 
