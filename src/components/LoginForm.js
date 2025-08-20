@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import {useAuth} from "../utils/useAuth";
-import { Button, Fieldset , TextInput, PasswordInput} from "@mantine/core";
+import { Button, Fieldset , TextInput, PasswordInput, LoadingOverlay} from "@mantine/core";
+import { useDisclosure } from "@mantine/hooks";
 
 const LoginForm = () => {
 
@@ -13,16 +14,22 @@ const LoginForm = () => {
     // create state variable named form, form object holds email and password values
     // setform updates with new data causing react to re render with ne form data
     const [form, setForm] = useState({email:'', password:''})
-
+    
 
     // page refreshes on submit automatically this prevents it from happpening then calls the login  function from use auth in utility
     const handleSubmit = (e) =>{
+
+        
 
         e.preventDefault();
 
         login(form.email,form.password);
 
+        
+
         navigate("/app/home");
+
+
 
     }
 
@@ -34,6 +41,9 @@ const LoginForm = () => {
     return (
         <Fieldset legend="Enter Your Login Details">
         <form>
+
+            
+
 
             <TextInput onChange={handleChange} value={form.email} type='email' name="email" placeholder="Email Address"></TextInput>
             <PasswordInput onChange={handleChange} value={form.password} type='password' name='password' placeholder="Password"></PasswordInput>

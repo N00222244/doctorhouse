@@ -3,7 +3,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useAuth } from "../../utils/useAuth";
 import axios from "axios";
 import { useState, useEffect } from "react";
-import { Button } from "@mantine/core";
+import { Button, Divider, Group,Title,Text } from "@mantine/core";
 import BackButton from "../../components/BackButton";
 
 
@@ -58,18 +58,53 @@ const SingleDoctor = () => {
         <>
         <BackButton/>
 
-        <h2>Doctor ID: {doctor.id}</h2>
-        <h1>Full Name: DR {doctor.first_name} {doctor.last_name}</h1>
-        <h2>First Name : {doctor.first_name}</h2>
-        <h2>First Name : {doctor.last_name}</h2>
-        <h2>Specialisation: {doctor.specialisation}</h2>
-        <h2>Email: {doctor.email}</h2>
-        <h2>Phone No: + 353 {doctor.phone}</h2>
 
+        <Divider/>
+
+        <Title fw={700} order={2}>Doctor Details</Title>
+        <Divider></Divider>
+
+        <Group>
+            <Text fw={600} >Doctor ID:</Text>
+            <Text fw={400} >{doctor.id}</Text>
+        </Group>
+
+        <Group>
+            <Text fw={600} >Full Name:</Text>
+            <Text fw={400} >DR {doctor.first_name} {doctor.last_name}</Text>
+        </Group>
+
+        <Group>
+            <Text fw={600} >Specialisation:</Text>
+            <Text fw={400} >{doctor.specialisation}</Text>
+        </Group>
 
         
-        <button onClick={() => navigate(`../doctors/${doctor.id}/edit`)}>Edit Doctor</button>
+
+        <Divider/>
+        <Title fw={700} order={2}>Contact Information</Title>
+        <Divider/>
+
+        <Group>
+            <Text fw={600} >Email:</Text>
+            <Text fw={400} >{doctor.email}</Text>
+        </Group>
+
+        <Group>
+            <Text fw={600} >Phone No:</Text>
+            <Text fw={400} >+ 353 {doctor.phone}</Text>
+        </Group>
+
+
+
+        <Divider/>
+            <Title fw={700} order={2}>Manage</Title>
+        <Divider/>
+
+        <Group pt={20}>
+        <Button onClick={() => navigate(`../doctors/${doctor.id}/edit`)}>Edit Doctor</Button>
         <Button onClick={DeleteDoctor}>Delete Doctor</Button>
+        </Group>
         
         
         

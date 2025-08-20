@@ -3,7 +3,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useAuth } from "../../utils/useAuth";
 import axios from "axios";
 import { useState, useEffect } from "react";
-import { Button } from "@mantine/core";
+import { Button, Divider, Group, Text, Title } from "@mantine/core";
 import BackButton from "../../components/BackButton";
 
 
@@ -78,20 +78,53 @@ const SingleDiagnoses = () => {
 
         <BackButton/>
 
-        <h2>Diagnoses ID: {diagnoses.id}</h2>
-        <h2>Condition: {diagnoses.condition}</h2>
-        <h2>Diagnoses Date: {new Date(diagnoses.diagnosis_date * 1000).toLocaleDateString()}</h2>
-        <h2>Patient ID: {diagnoses.patient_id}</h2>
-        <h2>Patient Name: {patient.first_name}{patient.last_name}</h2>
-        
-        
-        
+
+        <Divider/>
+            <Title fw={700} order={2}>Diagnosis Information</Title>
+        <Divider/>
+
+        <Group>
+            <Text fw={600}>Diagnoses ID:</Text> 
+            <Text fw={400}> {diagnoses.id}</Text>
+        </Group>
+
+        <Group>
+            <Text fw={600}>Condition:</Text> 
+            <Text fw={400}> {diagnoses.condition}</Text>
+        </Group>
+
+        <Group>
+            <Text fw={600}>Diagnoses Date:</Text> 
+            <Text fw={400}> {new Date(diagnoses.diagnosis_date * 1000).toLocaleDateString()}</Text>
+        </Group>
 
 
-        
-        <button onClick={() => navigate(`../diagnoses/${diagnoses.id}/edit`)}>Edit Diagnosis</button>
-        <Button onClick={DeleteDiagnoses}>Delete Diagnosis</Button>
-        
+
+        <Divider/>
+            <Title fw={700} order={2}>Patient Information</Title>
+        <Divider/>
+
+
+        <Group>
+            <Text fw={600}>Patient ID:</Text> 
+            <Text fw={400}> {diagnoses.patient_id}</Text>
+        </Group>
+
+        <Group>
+            <Text fw={600}>Patient Name:</Text> 
+            <Text fw={400}> {patient.first_name}{patient.last_name}</Text>
+        </Group>
+
+
+        <Divider/>
+            <Title fw={700} order={2}>Manage </Title>
+        <Divider/>
+    
+
+        <Group pt={20}>
+            <Button onClick={() => navigate(`../diagnoses/${diagnoses.id}/edit`)}>Edit Diagnosis</Button>
+            <Button onClick={DeleteDiagnoses}>Delete Diagnosis</Button>
+        </Group>
         
         
         </>

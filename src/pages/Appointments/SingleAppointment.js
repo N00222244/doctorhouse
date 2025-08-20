@@ -3,7 +3,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useAuth } from "../../utils/useAuth";
 import axios from "axios";
 import { useState, useEffect } from "react";
-import { Button, Divider } from "@mantine/core";
+import { Button, Divider, Group, Title, Text } from "@mantine/core";
 import BackButton from "../../components/BackButton";
 
 
@@ -79,26 +79,65 @@ const SingleAppointment = () => {
 
         <BackButton/>
 
-        
 
-        <h2>Appointment ID: {appointment.id}</h2>
-        <h2>Appointment Date: {new Date(appointment.appointment_date * 1000).toLocaleDateString()}</h2>
-        <Divider></Divider>
-        <h3>Patient ID: {appointment.patient_id}</h3>
-        <h2>Patient: {patient.first_name} {patient.last_name}</h2>
-        <Divider></Divider>
-        <h3>Doctors ID: {appointment.doctor_id}</h3>
-        <h2>Doctor: {doctor.first_name} {doctor.last_name}</h2>
-        
-        
-        
-        
+        <Divider/>
+            <Title fw={700} order={2}>Appointment Information</Title>
+        <Divider/>
 
 
+        <Group>
+            <Text fw={600}>Appointment ID:</Text> 
+            <Text fw={400}> {appointment.id}</Text>
+        </Group>
+
+        <Group>
+            <Text fw={600}>Appointment Date:</Text> 
+            <Text fw={400}> {new Date(appointment.appointment_date * 1000).toLocaleDateString()}</Text>
+        </Group>
         
-        <button onClick={() => navigate(`../appointments/${appointment.id}/edit`)}>Edit Appointment</button>
+
+        
+        
+        
+
+        <Divider/>
+            <Title fw={700} order={2}>Patient Information</Title>
+        <Divider/>
+
+
+        <Group>
+            <Text fw={600}>Patient ID:</Text> 
+            <Text fw={400}> {appointment.patient_id}</Text>
+        </Group>
+
+        <Group>
+            <Text fw={600}>Patient:</Text> 
+            <Text fw={400}> {patient.first_name} {patient.last_name}</Text>
+        </Group>
+
+        <Divider/>
+            <Title fw={700} order={2}>Doctor Information</Title>
+        <Divider/>
+
+        <Group>
+            <Text fw={600}>Doctors ID:</Text> 
+            <Text fw={400}> {appointment.doctor_id}</Text>
+        </Group>
+
+        <Group>
+            <Text fw={600}>Doctor:</Text> 
+            <Text fw={400}> {doctor.first_name} {doctor.last_name}</Text>
+        </Group>    
+        
+
+        <Divider/>
+            <Title fw={700} order={2}> Manage</Title>
+        <Divider/>
+        
+        <Group pt={20}>
+        <Button onClick={() => navigate(`../appointments/${appointment.id}/edit`)}>Edit Appointment</Button>
         <Button onClick={DeleteAppointment}>Delete Appointment</Button>
-        
+        </Group>
         
         
         </>

@@ -3,7 +3,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useAuth } from "../../utils/useAuth";
 import axios from "axios";
 import { useState, useEffect } from "react";
-import { Button, Divider } from "@mantine/core";
+import { Button, Divider, Text,Title , Group} from "@mantine/core";
 
 import BackButton from "../../components/BackButton";
 
@@ -90,36 +90,105 @@ const SinglePrescription = () => {
 
         <BackButton/>
         
-        <h2>Prescription ID: {prescription.id}</h2>
-        <h2>Patient ID: {prescription.patient_id}</h2>
-        <h2>Patient Name: {patient.first_name} {patient.last_name}</h2>
+
+        <Divider/>
+        <Title fw={700} order={2} >Prescription Information</Title>
+        <Divider/>
+
+        <Group>
+            <Text fw={600}>Prescription ID: </Text>
+            <Text fw={400}>{prescription.id}</Text>
+        </Group>
+
+        <Group>
+            <Text fw={600}>Patient ID: </Text>
+            <Text fw={400}>{prescription.patient_id}</Text>
+        </Group>
+
+        <Group>
+            <Text fw={600}>Patient Name: </Text>
+            <Text fw={400}>{patient.first_name} {patient.last_name}</Text>
+        </Group>
+
         
-
-        <Divider></Divider>
-        <h2>Diagnosis ID: {prescription.diagnosis_id}</h2>
-        <h2>Condition: {diagnosis.condition}</h2>
-        <Divider></Divider>
-        <h2>Medication: {prescription.medication}</h2>
-        <h2>Dosage: {prescription.dosage}</h2>
-        <h2>Prescription Date: {new Date(prescription.start_date * 1000).toLocaleDateString()}</h2>
-        <h2>Prescription Date: {new Date(prescription.end_date * 1000).toLocaleDateString()}</h2>
-
        
-
-        <Divider></Divider>
-        <h2>Doctors ID: {prescription.doctor_id}</h2>
-        <h2>Doctor Name: DR {doctor.first_name} {doctor.last_name}</h2>
-        
-        
-        
         
         
 
+        <Divider/>
+        <Title fw={700} order={2} >Diagnosis Information</Title>
+        <Divider/>
+
+
+        <Group>
+            <Text fw={600}>Diagnosis ID: </Text>
+            <Text fw={400}>{prescription.diagnosis_id}</Text>
+        </Group>
+
+          <Group>
+            <Text fw={600}>Condition: </Text>
+            <Text fw={400}>{diagnosis.condition}</Text>
+        </Group>
+
+
+
+
 
         
-        <button onClick={() => navigate(`../prescriptions/${prescription.id}/edit`)}>Edit Prescription</button>
+
+        <Divider/>
+        <Title fw={700} order={2} >Medication Information</Title>
+        <Divider/>
+
+        <Group>
+            <Text fw={600}>Medication: </Text>
+            <Text fw={400}>{prescription.medication}</Text>
+        </Group>
+
+        <Group>
+            <Text fw={600}>Dosage: </Text>
+            <Text fw={400}>{prescription.dosage}</Text>
+        </Group>
+
+        <Group>
+            <Text fw={600}>Prescription Start Date: </Text>
+            <Text fw={400}>{new Date(prescription.start_date * 1000).toLocaleDateString()}</Text>
+        </Group>
+
+        <Group>
+            <Text fw={600}>Prescription End Date: </Text>
+            <Text fw={400}>{new Date(prescription.end_date * 1000).toLocaleDateString()}</Text>
+        </Group>
+
+
+        
+
+
+        
+        <Divider/>
+        <Title fw={700} order={2} >Doctor Information</Title>
+        <Divider/>
+
+
+        <Group>
+            <Text fw={600}>Doctors ID: </Text>
+            <Text fw={400}>{prescription.doctor_id}</Text>
+        </Group>
+
+        <Group>
+            <Text fw={600}>Doctor Name: </Text>
+            <Text fw={400}>DR {doctor.first_name} {doctor.last_name}</Text>
+        </Group>
+        
+
+        <Divider/>
+        <Title fw={700} order={2} >Manage</Title>
+        <Divider/>
+        
+        <Group pt={20}>
+        <Button onClick={() => navigate(`../prescriptions/${prescription.id}/edit`)}>Edit Prescription</Button>
         <Button onClick={DeletePrescription}>Delete Prescription</Button>
-        
+        </Group>
         
         
         </>

@@ -1,11 +1,13 @@
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../utils/useAuth";
-import { Select, Stack, TextInput, Text, Paper, Container } from "@mantine/core";
+import { Select, Stack, TextInput, Text, Paper, Container , LoadingOverlay} from "@mantine/core";
 import { useForm  } from '@mantine/form';
 import { showNotification } from "@mantine/notifications";
 import BackButton from "../../components/BackButton";
 import FormBox from "../../components/FormBox";
+import { useDisclosure } from '@mantine/hooks';
+
  
 
 
@@ -19,6 +21,15 @@ const CreateDocotor = () => {
    // console.log("Token before post request is sent:", token); <-- Kept geting 401 error 
    // needed to see what actually was being sent when token was called from use auth
    // turns out the whole object was and forgot to destructure it oopsie daisies
+
+
+   // using mantine hook useDisclosure which provides ability to use open and close handlers based on state basically bolean state managers
+
+
+    const [opened, handlers] = useDisclosure(false, {
+        onOpen: () => console.log('Opened'),
+        onClose: () => console.log('Closed'),
+    });
 
 
 
@@ -41,6 +52,8 @@ const CreateDocotor = () => {
 
 
     const handleSubmit = () => {
+
+        handlers.open();
         
 
         
@@ -68,12 +81,14 @@ const CreateDocotor = () => {
             
         })
         .catch((err) =>{ // catch any erros and log them to the console
-            console.log(err);
-
             
+            
+            console.log(err);
+        })
 
 
-        
+        .finally(()=> {
+            handlers.close();
 
         });
 
@@ -118,12 +133,11 @@ const CreateDocotor = () => {
 
 
 
-            <Container style={{
-        border: "1px solid black", // black outline
-        padding: "20px",           // optional padding
-      }}>
+            <FormBox>
                 
                 <Stack>
+
+                    <LoadingOverlay visible={opened}  />
 
                 
                 <TextInput  type='text'  {...form.getInputProps('first_name')}  name="first_name"  placeholder="Enter First name" ></TextInput>
@@ -152,11 +166,11 @@ const CreateDocotor = () => {
                 </div>
 
                 
-                <button type="submit">Create Docotor</button>
+                <button  type="submit">Create Docotor</button>
 
                 </Stack>
-                
-            </Container>
+                        
+            </FormBox>
                 
             </form>
 
