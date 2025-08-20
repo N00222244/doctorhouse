@@ -76,9 +76,9 @@ const App = () =>{
                     <Routes>
 
 
+                        {/* Public routes any user can access */}
                         {/* Landing Page Route */}
                         <Route path="/" element={<LandingPage />} />
-                        {/* Public routes any user can access */}
                         <Route path="/login" element={<LoginForm />} />
                         <Route path="/register" element={<RegisterForm />} />
                         
