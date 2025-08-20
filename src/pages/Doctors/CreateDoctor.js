@@ -137,7 +137,7 @@ const CreateDocotor = () => {
                 
                 <Stack>
 
-                    <LoadingOverlay visible={opened}  />
+                    
 
                 
                 <TextInput  type='text'  {...form.getInputProps('first_name')}  name="first_name"  placeholder="Enter First name" ></TextInput>

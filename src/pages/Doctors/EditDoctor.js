@@ -1,13 +1,14 @@
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../utils/useAuth";
-import { Select, Stack, TextInput } from "@mantine/core";
+import { LoadingOverlay, Select, Stack, TextInput } from "@mantine/core";
 import { useForm  } from '@mantine/form';
 import { showNotification } from "@mantine/notifications";
 import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import BackButton from "../../components/BackButton";
 import FormBox from "../../components/FormBox";
+import { useDisclosure } from "@mantine/hooks";
 
 
 
@@ -17,7 +18,10 @@ import FormBox from "../../components/FormBox";
 const EditDoctor = () => {
 
 
-
+    const [opened, handlers] = useDisclosure(false, {
+        onOpen: () => console.log('Opened'),
+        onClose: () => console.log('Closed'),
+    });
 
 
    const navigate = useNavigate();
@@ -72,6 +76,7 @@ const EditDoctor = () => {
 
     const handleSubmit = () => {
         
+        handlers.open();
 
         
         console.log('Token value:', token); 
@@ -100,12 +105,12 @@ const EditDoctor = () => {
         .catch((err) =>{ // catch any erros and log them to the console
             console.log(err);
 
-            
-
-
-        
-
+    
+        })
+        .finally(()=>{
+            handlers.close();
         });
+    
 
 
 
@@ -145,6 +150,8 @@ const EditDoctor = () => {
 
 
                 <Stack>
+
+                    <LoadingOverlay visible={opened}  />
 
                 
                 <TextInput  type='text'  {...form.getInputProps('first_name')}  name="first_name"  placeholder="Enter First name" ></TextInput>

@@ -1,13 +1,14 @@
 import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
 import { useAuth } from "../../utils/useAuth";
-import { TextInput, NumberInput } from "@mantine/core";
+import { TextInput, NumberInput, Stack } from "@mantine/core";
 import { useForm  } from '@mantine/form';
 import { showNotification } from "@mantine/notifications";
 import { DatePickerInput } from "@mantine/dates";
 import { Select } from "@mantine/core";
 import { useState, useEffect } from "react";
 import BackButton from "../../components/BackButton";
+import FormBox from "../../components/FormBox";
  
 
 
@@ -128,8 +129,12 @@ const EditPrescription = () => {
         <div>
 
             <BackButton/>
+                
 
             <form onSubmit={form.onSubmit(handleSubmit)}>
+
+                <FormBox>
+                    <Stack>
 
                 <Select label="Doctor" placeholder="Select a doctor" data={doctors.map((doctor) => ({
                         value: String(doctor.id), 
@@ -153,6 +158,10 @@ const EditPrescription = () => {
                 <DatePickerInput   {...form.getInputProps('end_date')}  name="end_date"  placeholder="Enter Prescription End Date" ></DatePickerInput>
                
                 <button type="submit">Edit Patient</button> 
+
+                    </Stack>
+
+                </FormBox>
             </form>
 
 

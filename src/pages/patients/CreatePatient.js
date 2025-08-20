@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../utils/useAuth";
-import { TextInput } from "@mantine/core";
+import { Button, Stack, TextInput } from "@mantine/core";
 import { useForm  } from '@mantine/form';
 import { showNotification } from "@mantine/notifications";
 import { DatePicker, DatePickerInput } from "@mantine/dates";
@@ -81,7 +81,16 @@ const CreatePatient = () => {
 
             <BackButton/>
 
+            
+
             <form onSubmit={form.onSubmit(handleSubmit)}>
+
+
+                <FormBox>
+
+                    <Stack>
+
+                    
 
                 
                 <TextInput  type='text'  {...form.getInputProps('first_name')}  name="first_name"  placeholder="Enter First name" ></TextInput>
@@ -91,8 +100,16 @@ const CreatePatient = () => {
                 <DatePickerInput {...form.getInputProps('date_of_birth')} name="date_of_birth" placeholder="Enter Date of Birth"></DatePickerInput>
                 <TextInput  type='address' {...form.getInputProps('address')} name="address" placeholder="Enter Address"></TextInput>
                
-                <button type="submit">Create Patient</button> 
+                <Button type="submit">Create Patient</Button>
+
+                    </Stack>
+
+                </FormBox> 
             </form>
+
+
+                
+            
 
 
         </div>

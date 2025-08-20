@@ -1,12 +1,13 @@
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../utils/useAuth";
-import { TextInput, NumberInput, Divider, Select } from "@mantine/core";
+import { TextInput, NumberInput, Divider, Select, Stack } from "@mantine/core";
 import { useForm  } from '@mantine/form';
 import { showNotification } from "@mantine/notifications";
 import { DatePickerInput } from "@mantine/dates";
 import { useEffect, useState } from "react";
 import BackButton from "../../components/BackButton";
+import FormBox from "../../components/FormBox";
 
  
 
@@ -105,6 +106,9 @@ const CreateDiagnoses = () => {
 
             <form onSubmit={form.onSubmit(handleSubmit)}>
 
+                <FormBox>
+
+                <Stack>
                 
                 <Select label="Patient" placeholder="Select a patient" data={patients.map((patient) => ({
                     value: String(patient.id), 
@@ -121,6 +125,8 @@ const CreateDiagnoses = () => {
                 
                
                 <button type="submit">Create Diagnosis</button> 
+                </Stack>
+                </FormBox>
             </form>
 
 

@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../utils/useAuth";
-import { TextInput, NumberInput, Divider } from "@mantine/core";
+import { TextInput, NumberInput, Divider, Stack } from "@mantine/core";
 import { useForm  } from '@mantine/form';
 import { showNotification } from "@mantine/notifications";
 import { DatePickerInput } from "@mantine/dates";
@@ -9,6 +9,7 @@ import { useEffect, useState } from "react";
 import { Select } from "@mantine/core";
 
 import BackButton from "../../components/BackButton";
+import FormBox from "../../components/FormBox";
 
 
 
@@ -140,6 +141,9 @@ const CreatePrescription = () => {
 
             <form onSubmit={form.onSubmit(handleSubmit)}>
 
+                <FormBox>
+                    <Stack>
+
                 <Select label="Doctor" placeholder="Select a doctor" data={doctors.map((doctor) => ({
                                     value: String(doctor.id), 
                                     label: `Dr. ${doctor.first_name} ${doctor.last_name}`,
@@ -169,6 +173,10 @@ const CreatePrescription = () => {
                 
                
                 <button type="submit">Create Prescription</button> 
+
+                        </Stack>
+
+                </FormBox>
             </form>
 
 

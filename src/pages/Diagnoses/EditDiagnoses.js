@@ -1,12 +1,13 @@
 import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
 import { useAuth } from "../../utils/useAuth";
-import { TextInput, NumberInput, Select } from "@mantine/core";
+import { TextInput, NumberInput, Select, Stack } from "@mantine/core";
 import { useForm  } from '@mantine/form';
 import { showNotification } from "@mantine/notifications";
 import { DatePickerInput } from "@mantine/dates";
 import { useState, useEffect } from "react";
 import BackButton from "../../components/BackButton";
+import FormBox from "../../components/FormBox";
 
 
 
@@ -112,6 +113,10 @@ const EditDiagnoses = () => {
 
             <form onSubmit={form.onSubmit(handleSubmit)}>
 
+                <FormBox>
+
+                    <Stack>
+
                 
                 <DatePickerInput  {...form.getInputProps('diagnosis_date')}  name="diagnosis_date"  placeholder="Enter Diagnosis Date" ></DatePickerInput>
                 <TextInput    {...form.getInputProps('condition')}  name="condition"  placeholder="Enter Condition" ></TextInput>
@@ -122,6 +127,10 @@ const EditDiagnoses = () => {
                     }))}{...form.getInputProps("patient_id")}/>
                
                 <button type="submit">Edit Diagnoses</button> 
+
+                    </Stack>
+
+                </FormBox>
             </form>
 
 
