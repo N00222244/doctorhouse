@@ -1,4 +1,4 @@
-import { Button, SimpleGrid , AppShell, Burger, Divider,Text, Stack, Center, Title } from "@mantine/core"
+import { Button, SimpleGrid , AppShell, Burger, Divider,Text, Stack, Center, Title, Group } from "@mantine/core"
 import { Outlet } from "react-router-dom"
 import { useDisclosure } from "@mantine/hooks";
 import { useAuth } from "../utils/useAuth";
@@ -32,7 +32,11 @@ const AppLayout = () => {
             <AppShell padding="md" header={{ height: 60 }} navbar={{width: 300,breakpoint: 'sm',collapsed: { mobile: !opened }}} >
                 <AppShell.Header style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }} >
                     
-                        <Title fw={900} order={1}  >BriarWood Medical Centre</Title>
+                       
+                       <Group>
+                        <Burger opened={opened} onClick={toggle} hiddenFrom="sm" size="sm"/>
+                        <Title fw={900} order={2}  >BriarWood Medical Centre</Title>
+                        </Group>
                     
                 </AppShell.Header>
 
