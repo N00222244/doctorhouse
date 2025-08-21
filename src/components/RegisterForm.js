@@ -2,6 +2,7 @@ import axios from "axios";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import {useAuth} from "../utils/useAuth";
+import { Fieldset, TextInput, PasswordInput, Button } from "@mantine/core";
 
 const RegisterForm = (props) => {
 
@@ -51,13 +52,24 @@ const RegisterForm = (props) => {
     }
 
     return (
-        <form>
-            <input onChange={handleChange} value={form.first_name} type='text' name="first_name" placeholder="Enter Your First name" ></input>
-            <input onChange={handleChange} value={form.last_name} type='text' name="last_name" placeholder="Enter Your Last name" ></input>
-            <input onChange={handleChange} value={form.email} type='email' name="email" placeholder="Enter Your Email"></input>
-            <input onChange={handleChange} value={form.password} type='password' name="password" placeholder="Enter your password"></input>
-            <button onClick={handleSubmit}>Submit Login</button>
-        </form>
+        
+        
+
+
+        
+            <form>
+                <TextInput onChange={handleChange} value={form.first_name} type='text' name="first_name" placeholder="Enter Your First name" ></TextInput>
+                <TextInput onChange={handleChange} value={form.last_name} type='text' name="last_name" placeholder="Enter Your Last name" ></TextInput>
+                <TextInput onChange={handleChange} value={form.email} type='email' name="email" placeholder="Enter Your Email"></TextInput>
+                <TextInput onChange={handleChange} value={form.password} type='password' name="password" placeholder="Enter your password"></TextInput>
+                <Button onClick={handleSubmit}>Submit Registration</Button>
+            </form>
+        
+
+
+
+
+        
     )
 
 
